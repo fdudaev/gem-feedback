@@ -193,10 +193,13 @@
         <select id="f-gem" aria-required="true" aria-describedby="f-gem-err"></select>
         <div class="field-error" id="f-gem-err" role="alert">Please select a Gem.</div>
       </div>
-      <div class="form-group">
+      <div class="form-group" style="margin-bottom:24px">
         <label for="f-msg">Your Feedback <span class="req" aria-hidden="true">*</span></label>
-        <textarea id="f-msg" placeholder="Tell us what worked well, what was confusing, or any suggestions…" aria-required="true" aria-describedby="f-msg-err"></textarea>
-        <div class="field-error" id="f-msg-err" role="alert">Please enter your feedback.</div>
+        <textarea id="f-msg" placeholder="Tell us what worked well, what was confusing, or any suggestions… (the more detail, the better!)" aria-required="true" aria-describedby="f-msg-err" style="min-height:160px;font-size:1rem;border-width:2px" oninput="document.getElementById('f-msg-count').textContent=this.value.length+' characters'"></textarea>
+        <div style="display:flex;justify-content:space-between;margin-top:4px">
+          <div class="field-error" id="f-msg-err" role="alert">Please enter your feedback.</div>
+          <span id="f-msg-count" style="font-size:.78rem;color:var(--muted)">0 characters</span>
+        </div>
       </div>
       <button class="btn btn-primary btn-submit" id="submit-btn">Submit Feedback →</button>
     </div>
@@ -596,8 +599,18 @@ function gemRow(g,idx){
 }
 async function handleGemAction(action,idx){
   const gems=getGems();const g=gems[idx];if(!g)return;
-  if(action==='retire'){gems[idx].status='retired';setGems(gems);showToast('"'+g.name+'" retired.','warning');renderGemManager();populateGemDropdown();}
-  else if(action==='restore'){gems[idx].status='active';setGems(gems);showToast('"'+g.name+'" restored.','success');renderGemManager();populateGemDropdown();}
+  if(action==='retire'){
+    gems[idx].status='retired';
+    await setGems(gems);
+    try{ await jsonpCall({action:'updateGem', name:g.name, status:'retired'}); }catch(e){}
+    showToast('"'+g.name+'" retired.','warning');renderGemManager();populateGemDropdown();
+  }
+  else if(action==='restore'){
+    gems[idx].status='active';
+    await setGems(gems);
+    try{ await jsonpCall({action:'updateGem', name:g.name, status:'active'}); }catch(e){}
+    showToast('"'+g.name+'" restored.','success');renderGemManager();populateGemDropdown();
+  }
   else if(action==='delete'){
     const all=cachedFeedback||[];
     const activeCount=all.filter(r=>r.gem===g.name&&(r.status||'active')==='active').length;
@@ -616,7 +629,8 @@ async function addGem(){
   const inp=document.getElementById('new-gem-name');const name=inp.value.trim();if(name.length<3)return;
   const gems=getGems();
   if(gems.find(g=>g.name.toLowerCase()===name.toLowerCase())){showToast('Gem "'+name+'" already exists.','error');return;}
-  gems.push({name,status:'active'});setGems(gems);inp.value='';
+  gems.push({name,status:'active'}); await setGems(gems);
+  try{ await jsonpCall({action:'addGem', name}); }catch(e){}inp.value='';
   document.getElementById('add-gem-btn').disabled=true;
   showToast('"'+name+'" added.','success');renderGemManager();populateGemDropdown();
 }
