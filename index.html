@@ -259,7 +259,7 @@
   </div>
 </main>
 <script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuj1S9rLJhmO0ee7Ot7jEEp6dd0hyFfTsMnX2oBeCAGoVB-cr0dgyj7EEXQfcmRSlT/exec';
+const APPS_SCRIPT_URL = '/.netlify/functions/sheet';
 const ADMIN_USER = 'qeteam@ieee.org';
 const ADMIN_PASS = 'Welcome@1';
 const GEMS_KEY   = 'ieee_gems_v2';
@@ -273,21 +273,13 @@ let adminAuthed=false, pendingTab=null, sortAsc=false, cachedFeedback=null;
 function getGems(){try{const r=localStorage.getItem(GEMS_KEY);return r?JSON.parse(r):DEFAULT_GEMS;}catch{return DEFAULT_GEMS;}}
 function setGems(a){localStorage.setItem(GEMS_KEY,JSON.stringify(a));}
 
-// ── JSONP — works across origins, follows 302 redirects ───────────
-function jsonpCall(params){
-  return new Promise((resolve,reject)=>{
-    const cb='gs_'+Date.now()+'_'+Math.floor(Math.random()*99999);
-    const script=document.createElement('script');
-    const timer=setTimeout(()=>{cleanup();reject(new Error('Timeout'));},20000);
-    function cleanup(){clearTimeout(timer);delete window[cb];if(script.parentNode)script.parentNode.removeChild(script);}
-    window[cb]=function(data){cleanup();resolve(data);};
-    script.onerror=function(){cleanup();reject(new Error('Script load failed'));};
-    const qs=Object.entries({...params,callback:cb})
-      .map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(String(v===null||v===undefined?'':v)))
-      .join('&');
-    script.src=APPS_SCRIPT_URL+'?'+qs;
-    document.head.appendChild(script);
-  });
+// ── fetch via Netlify proxy — no CORS issues ──────────────────────
+async function jsonpCall(params) {
+  const qs = Object.entries(params)
+    .map(([k,v]) => encodeURIComponent(k) + '=' + encodeURIComponent(String(v===null||v===undefined?'':v)))
+    .join('&');
+  const res = await fetch(APPS_SCRIPT_URL + '?' + qs);
+  return res.json();
 }
 
 async function fetchFeedback(){
