@@ -268,10 +268,24 @@ const DEFAULT_GEMS = [
   {name:'IDAMS',status:'active'},{name:'WMS',status:'active'},
   {name:'Fellows',status:'active'},{name:'Other',status:'active'}
 ];
-let adminAuthed=false, pendingTab=null, sortAsc=false, cachedFeedback=null;
+let adminAuthed=false, pendingTab=null, sortAsc=false, cachedFeedback=null, cachedGems=null;
 
-function getGems(){try{const r=localStorage.getItem(GEMS_KEY);return r?JSON.parse(r):DEFAULT_GEMS;}catch{return DEFAULT_GEMS;}}
-function setGems(a){localStorage.setItem(GEMS_KEY,JSON.stringify(a));}
+function getGems(){ return cachedGems || DEFAULT_GEMS; }
+
+async function loadGems(){
+  try {
+    const d = await jsonpCall({ action:'getGems' });
+    if (d.result === 'success' && d.gems && d.gems.length > 0) {
+      cachedGems = d.gems;
+    } else {
+      cachedGems = DEFAULT_GEMS;
+    }
+  } catch(e) { cachedGems = DEFAULT_GEMS; }
+}
+
+async function setGems(a){
+  cachedGems = a;
+}
 
 // ── fetch via Netlify proxy — no CORS issues ──────────────────────
 async function jsonpCall(params) {
@@ -358,6 +372,8 @@ window.addEventListener('DOMContentLoaded',async()=>{
   });
   populateGemDropdown();
   applyUrlParam();
+  // load gems from sheet on boot
+  loadGems().then(()=>{ populateGemDropdown(); applyUrlParam(); });
 });
 
 function requireAdmin(tab){
