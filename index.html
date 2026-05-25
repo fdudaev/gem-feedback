@@ -320,11 +320,26 @@ function setGems(a){ localStorage.setItem(GEMS_KEY, JSON.stringify(a)); }
 // ── FEEDBACK: Google Sheets via Apps Script ───────────────────────
 function jsonp(url) {
   return new Promise((resolve, reject) => {
-    const cb = 'cb_' + Date.now();
+    const cb = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*9999);
     const script = document.createElement('script');
     script.src = url + '&callback=' + cb;
-    window[cb] = data => { delete window[cb]; document.body.removeChild(script); resolve(data); };
-    script.onerror = () => { delete window[cb]; document.body.removeChild(script); reject(new Error('JSONP failed')); };
+    const timer = setTimeout(() => {
+      delete window[cb];
+      if(script.parentNode) document.body.removeChild(script);
+      reject(new Error('JSONP timeout'));
+    }, 10000);
+    window[cb] = data => {
+      clearTimeout(timer);
+      delete window[cb];
+      if(script.parentNode) document.body.removeChild(script);
+      resolve(data);
+    };
+    script.onerror = () => {
+      clearTimeout(timer);
+      delete window[cb];
+      if(script.parentNode) document.body.removeChild(script);
+      reject(new Error('JSONP failed'));
+    };
     document.body.appendChild(script);
   });
 }
@@ -336,28 +351,47 @@ async function fetchFeedback() {
   } catch(e) { console.error('Fetch error', e); return []; }
 }
 
-async function postFeedback(entry) {
-  await fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: JSON.stringify({ action: 'add', ...entry })
+// POST via hidden iframe form — the only reliable cross-origin POST to Apps Script
+function iframePost(payload) {
+  return new Promise(resolve => {
+    const uid = 'f_' + Date.now();
+    const iframe = document.createElement('iframe');
+    iframe.name = uid;
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = APPS_SCRIPT_URL;
+    form.target = uid;
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'payload';
+    input.value = JSON.stringify(payload);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+
+    // Apps Script won't send a readable response cross-origin, so we just wait briefly
+    setTimeout(() => {
+      if(iframe.parentNode) document.body.removeChild(iframe);
+      if(form.parentNode)   document.body.removeChild(form);
+      resolve({ result: 'success' });
+    }, 2000);
   });
+}
+
+async function postFeedback(entry) {
+  await iframePost({ action: 'add', ...entry });
 }
 
 async function updateFeedbackStatus(id, status) {
-  await fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: JSON.stringify({ action: 'update', id, status })
-  });
+  await iframePost({ action: 'update', id, status });
 }
 
 async function deleteFeedbackByGem(gem) {
-  await fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: JSON.stringify({ action: 'deleteGem', gem })
-  });
+  await iframePost({ action: 'deleteGem', gem });
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────
