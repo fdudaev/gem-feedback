@@ -317,33 +317,7 @@ function getGems(){
 }
 function setGems(a){ localStorage.setItem(GEMS_KEY, JSON.stringify(a)); }
 
-// ── FEEDBACK: Google Sheets via JSONP GET (no CORS issues) ────────
-function jsonp(url) {
-  return new Promise((resolve, reject) => {
-    const cb = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*99999);
-    const script = document.createElement('script');
-    script.src = url + '&callback=' + cb;
-    const timer = setTimeout(() => {
-      delete window[cb];
-      if (script.parentNode) document.body.removeChild(script);
-      reject(new Error('JSONP timeout'));
-    }, 15000);
-    window[cb] = data => {
-      clearTimeout(timer);
-      delete window[cb];
-      if (script.parentNode) document.body.removeChild(script);
-      resolve(data);
-    };
-    script.onerror = () => {
-      clearTimeout(timer);
-      delete window[cb];
-      if (script.parentNode) document.body.removeChild(script);
-      reject(new Error('JSONP failed'));
-    };
-    document.body.appendChild(script);
-  });
-}
-
+// ── FEEDBACK: Google Sheets via fetch GET ─────────────────────────
 function buildUrl(params) {
   const q = Object.entries(params)
     .map(([k,v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
@@ -351,15 +325,20 @@ function buildUrl(params) {
   return APPS_SCRIPT_URL + '?' + q;
 }
 
+async function sheetGet(params) {
+  const res = await fetch(buildUrl(params));
+  return res.json();
+}
+
 async function fetchFeedback() {
   try {
-    const d = await jsonp(buildUrl({ action: 'get' }));
+    const d = await sheetGet({ action:'get' });
     return d.result === 'success' ? d.data : [];
   } catch(e) { console.error('Fetch error', e); return []; }
 }
 
 async function postFeedback(entry) {
-  await jsonp(buildUrl({
+  const d = await sheetGet({
     action:  'add',
     id:      entry.id,
     date:    entry.date,
@@ -368,15 +347,16 @@ async function postFeedback(entry) {
     gem:     entry.gem,
     message: entry.message,
     status:  entry.status
-  }));
+  });
+  if (d.result !== 'success') throw new Error(d.error || 'Failed');
 }
 
 async function updateFeedbackStatus(id, status) {
-  await jsonp(buildUrl({ action: 'update', id, status }));
+  await sheetGet({ action:'update', id, status });
 }
 
 async function deleteFeedbackByGem(gem) {
-  await jsonp(buildUrl({ action: 'deleteGem', gem }));
+  await sheetGet({ action:'deleteGem', gem });
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────
@@ -606,15 +586,16 @@ async function submitFeedback(){
   };
   const btn=document.getElementById('submit-btn');
   btn.disabled=true; btn.textContent='Submitting…';
-  try{
+  try {
     await postFeedback(entry);
-    cachedFeedback=null; // invalidate cache
-    document.getElementById('success-gem').innerHTML=xi(esc(entry.gem));
-    document.getElementById('form-card').style.display='none';
-    document.getElementById('success-card').style.display='';
+    cachedFeedback = null;
+    document.getElementById('success-gem').innerHTML = xi(esc(entry.gem));
+    document.getElementById('form-card').style.display = 'none';
+    document.getElementById('success-card').style.display = '';
     announce('Feedback submitted successfully.');
-  } catch(e){
-    showToast('Submission failed. Please try again.','error');
+  } catch(e) {
+    console.error('Submit error:', e);
+    showToast('Submission failed: ' + e.message, 'error');
   }
   btn.disabled=false; btn.textContent='Submit Feedback →';
 }
