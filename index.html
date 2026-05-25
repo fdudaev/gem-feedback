@@ -83,18 +83,25 @@
   .filter-label{font-size:.85rem;font-weight:600;color:var(--ieee-dark);}
   .count-badge{background:var(--ieee-blue);color:white;border-radius:20px;padding:2px 12px;font-size:.8rem;font-weight:700;}
   .table-wrap{background:white;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow-x:auto;margin-bottom:20px;}
-  table{width:100%;border-collapse:collapse;min-width:700px;}
-  th{background:var(--ieee-dark);color:white;padding:11px 14px;text-align:left;font-size:.82rem;letter-spacing:.5px;white-space:nowrap;}
+  table{width:100%;border-collapse:collapse;table-layout:fixed;}
+  th{background:var(--ieee-dark);color:white;padding:10px 12px;text-align:left;font-size:.8rem;letter-spacing:.5px;white-space:nowrap;overflow:hidden;}
   th.sortable{cursor:pointer;user-select:none;}
   th.sortable:hover{background:#005580;}
-  td{padding:11px 14px;font-size:.88rem;border-bottom:1px solid var(--border);vertical-align:top;}
+  th:nth-child(1){width:110px;}
+  th:nth-child(2){width:130px;}
+  th:nth-child(3){width:170px;}
+  th:nth-child(4){width:90px;}
+  th:nth-child(5){width:auto;}
+  th:nth-child(6){width:90px;}
+  th:nth-child(7){width:120px;}
+  td{padding:10px 12px;font-size:.87rem;border-bottom:1px solid var(--border);vertical-align:top;overflow:hidden;}
   tr:last-child td{border-bottom:none;}
   tr:hover td{background:var(--ieee-light);}
   .gem-pill{background:var(--ieee-light);color:var(--ieee-blue);border-radius:12px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;}
-  .msg-cell{max-width:230px;color:#444;line-height:1.5;}
-  .msg-inner{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .msg-cell{color:#444;line-height:1.55;word-break:break-word;}
+  .msg-inner{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;line-height:1.55;}
   .msg-inner.expandable{cursor:pointer;}
-  .msg-inner.expanded{display:block;white-space:pre-wrap;word-break:break-word;-webkit-line-clamp:unset;overflow:visible;}
+  .msg-inner.expanded{display:block;white-space:pre-wrap;word-break:break-word;-webkit-line-clamp:unset;overflow:visible;background:var(--ieee-light);padding:8px;border-radius:6px;}
   .empty-state{text-align:center;padding:40px;color:var(--muted);}
   .empty-state div{font-size:2rem;margin-bottom:8px;}
   .status-active-badge{background:#e6f9ee;color:#1a7a3c;border-radius:12px;padding:3px 10px;font-size:.75rem;font-weight:700;white-space:nowrap;}
@@ -273,8 +280,6 @@ const DEFAULT_GEMS = [
 ];
 let adminAuthed=false, pendingTab=null, sortAsc=false, cachedFeedback=null, cachedGems=null;
 
-function getGems(){ return cachedGems || DEFAULT_GEMS; }
-
 async function loadGems(){
   try {
     const d = await jsonpCall({ action:'getGems' });
@@ -283,12 +288,14 @@ async function loadGems(){
     } else {
       cachedGems = DEFAULT_GEMS;
     }
-  } catch(e) { cachedGems = DEFAULT_GEMS; }
+  } catch(e) {
+    console.error('loadGems error:',e);
+    cachedGems = DEFAULT_GEMS;
+  }
 }
 
-async function setGems(a){
-  cachedGems = a;
-}
+function getGems(){ return cachedGems || DEFAULT_GEMS; }
+async function setGems(a){ cachedGems = a; }
 
 // ── fetch via Netlify proxy — no CORS issues ──────────────────────
 async function jsonpCall(params) {
@@ -373,10 +380,10 @@ window.addEventListener('DOMContentLoaded',async()=>{
     if(!e.target.closest('.msg-inner'))
       document.querySelectorAll('.msg-inner.expanded').forEach(el=>el.classList.remove('expanded'));
   });
+  // load gems from Sheets on every boot — persists across all browsers/sessions
+  await loadGems();
   populateGemDropdown();
   applyUrlParam();
-  // load gems from sheet on boot
-  loadGems().then(()=>{ populateGemDropdown(); applyUrlParam(); });
 });
 
 function requireAdmin(tab){
@@ -554,7 +561,15 @@ function renderTable(){
     if(!isCompleted)ac='<button class="btn-complete" data-id="'+r.id+'" data-action="complete">Mark Complete</button>';
     else if(gemExists)ac='<button class="btn-reopen" data-id="'+r.id+'" data-action="reopen">Re-open</button>';
     else ac='<span style="color:var(--muted);font-size:.78rem">—</span>';
-    return '<tr><td style="white-space:nowrap;color:var(--muted);font-size:.8rem">'+fmtDate(r.date)+'</td><td style="white-space:nowrap;font-weight:600">'+esc(r.name)+'</td><td style="color:var(--ieee-blue);font-size:.83rem;white-space:nowrap">'+esc(r.email)+'</td><td><span class="gem-pill">'+xi(esc(r.gem))+'</span></td><td class="msg-cell">'+msgDiv+'</td><td><span class="'+(isCompleted?'status-completed-badge':'status-active-badge')+'">'+(isCompleted?'Completed':'Active')+'</span></td><td>'+ac+'</td></tr>';
+    return '<tr>'
+      +'<td style="color:var(--muted);font-size:.75rem">'+fmtDate(r.date)+'</td>'
+      +'<td style="font-weight:600;word-break:break-word">'+esc(r.name)+'</td>'
+      +'<td style="color:var(--ieee-blue);font-size:.82rem;word-break:break-all">'+esc(r.email)+'</td>'
+      +'<td><span class="gem-pill">'+xi(esc(r.gem))+'</span></td>'
+      +'<td class="msg-cell">'+msgDiv+'</td>'
+      +'<td><span class="'+(isCompleted?'status-completed-badge':'status-active-badge')+'">'+(isCompleted?'Completed':'Active')+'</span></td>'
+      +'<td>'+ac+'</td>'
+      +'</tr>';
   }).join('');
   tbody.querySelectorAll('.msg-inner.expandable').forEach(el=>{
     el.addEventListener('dblclick',()=>expandMsg(el));
@@ -635,16 +650,35 @@ async function addGem(){
   showToast('"'+name+'" added.','success');renderGemManager();populateGemDropdown();
 }
 async function exportExcel(){
-  const all=cachedFeedback||[];
-  if(!all.length){showToast('No submissions to export.','info');return;}
+  const all = cachedFeedback || [];
+  if(!all.length){ showToast('No submissions to export.','info'); return; }
+  showToast('Preparing Excel file…','info');
   if(!window.XLSX){
-    showToast('Loading Excel library…','info');
-    await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=res;s.onerror=rej;document.head.appendChild(s);});
+    await new Promise((res,rej)=>{
+      const s=document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=res; s.onerror=rej;
+      document.head.appendChild(s);
+    });
   }
-  const rows=all.map(r=>({Date:fmtDate(r.date),Name:r.name,Email:r.email,Gem:r.gem,Message:r.message,Status:r.status||'active'}));
+  const rows=all.map(r=>({
+    Date:    fmtDate(r.date),
+    Name:    r.name,
+    Email:   r.email,
+    Gem:     r.gem,
+    Message: r.message,
+    Status:  r.status||'active'
+  }));
   const ws=XLSX.utils.json_to_sheet(rows);
-  ws['!cols']=[{wch:22},{wch:22},{wch:30},{wch:12},{wch:50},{wch:12}];
-  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,'Feedback',ws);
+  ws['!cols']=[{wch:22},{wch:22},{wch:30},{wch:12},{wch:60},{wch:12}];
+  // set message column to wrap text
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  for(let R=range.s.r; R<=range.e.r; R++){
+    const cell = ws[XLSX.utils.encode_cell({r:R, c:4})];
+    if(cell) cell.s = { alignment: { wrapText: true } };
+  }
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,'Feedback',ws);
   XLSX.writeFile(wb,'gem-feedback-'+new Date().toISOString().slice(0,10)+'.xlsx');
   showToast('Excel file downloaded!','success');
 }
