@@ -50,16 +50,12 @@
   .success-icon{font-size:3rem;margin-bottom:16px;}
   .success-box h2{color:var(--ieee-dark);margin-bottom:10px;}
   .success-box p{color:var(--muted);margin-bottom:24px;line-height:1.6;}
-
-  /* TOAST */
   #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);color:white;padding:13px 28px;border-radius:8px;font-size:.9rem;font-weight:500;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:999;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2);}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   #toast.success{background:#1a7a3c;}
   #toast.warning{background:#c07000;}
   #toast.info{background:var(--ieee-blue);}
   #toast.error{background:#cc2200;}
-
-  /* MESSAGE MODAL */
   .msg-modal-overlay{position:fixed;inset:0;background:rgba(0,40,60,.5);display:flex;align-items:center;justify-content:center;z-index:300;padding:20px;}
   .msg-modal-box{background:white;border-radius:12px;padding:36px 40px;max-width:640px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.25);max-height:85vh;overflow-y:auto;}
   .msg-modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;gap:16px;}
@@ -72,8 +68,6 @@
   .msg-modal-divider{border:none;border-top:1px solid var(--border);margin-bottom:20px;}
   .msg-modal-label{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;}
   .msg-modal-body{font-size:.98rem;line-height:1.85;color:#222;white-space:pre-wrap;word-break:break-word;}
-
-  /* CONFIRM DIALOG */
   .dialog-overlay{position:fixed;inset:0;background:rgba(0,40,60,.45);display:flex;align-items:center;justify-content:center;z-index:200;}
   .dialog-box{background:white;border-radius:12px;padding:32px 30px;width:100%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,.18);text-align:center;}
   .dialog-box h3{color:var(--ieee-dark);margin-bottom:10px;font-size:1.05rem;}
@@ -83,8 +77,6 @@
   .dialog-yes:hover{background:#aa1a00;}
   .dialog-no{padding:9px 28px;background:white;color:var(--muted);border:2px solid var(--border);border-radius:6px;font-weight:600;cursor:pointer;font-size:.9rem;font-family:inherit;}
   .dialog-no:hover{background:var(--gray);}
-
-  /* LOGIN */
   .login-overlay{position:fixed;inset:0;background:rgba(0,40,60,.55);display:flex;align-items:center;justify-content:center;z-index:100;}
   .login-box{background:white;border-radius:12px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.2);text-align:center;}
   .login-logo{display:inline-block;margin-bottom:18px;color:var(--ieee-dark);border:2px solid var(--ieee-dark);font-size:1.4rem;font-weight:800;letter-spacing:2px;padding:2px 10px;border-radius:3px;}
@@ -95,8 +87,6 @@
   .login-btn{width:100%;padding:12px;background:var(--ieee-blue);color:white;border:2px solid var(--ieee-blue);border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;}
   .login-btn:hover{background:var(--ieee-dark);}
   .cancel-lnk{display:block;margin-top:12px;color:var(--muted);font-size:.88rem;cursor:pointer;text-decoration:underline;background:none;border:none;width:100%;font-family:inherit;padding:4px;}
-
-  /* SUBMISSIONS */
   .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
   .admin-header h2{color:var(--ieee-dark);font-size:1.15rem;}
   .filter-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
@@ -112,7 +102,6 @@
   tr:last-child td{border-bottom:none;}
   tr:hover td{background:var(--ieee-light);}
   .gem-pill{background:var(--ieee-light);color:var(--ieee-blue);border-radius:12px;padding:3px 10px;font-size:.78rem;font-weight:700;white-space:nowrap;}
-  /* message cell */
   .msg-td{min-width:220px;max-width:320px;}
   .msg-preview{color:#333;line-height:1.55;font-size:.87rem;cursor:pointer;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
   .msg-preview:hover{color:var(--ieee-blue);}
@@ -125,8 +114,6 @@
   .btn-complete:hover{background:#e6f9ee;}
   .btn-reopen{padding:6px 12px;font-size:.78rem;border-radius:5px;cursor:pointer;border:1.5px solid #aaa;color:#888;background:white;font-weight:600;white-space:nowrap;font-family:inherit;}
   .btn-reopen:hover{background:#f5f5f5;}
-
-  /* GEM MANAGER */
   .section-title{font-size:1rem;font-weight:700;color:var(--ieee-dark);margin-bottom:14px;}
   .gem-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
   .gem-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:8px;border:1.5px solid var(--border);background:white;}
@@ -164,7 +151,6 @@
 </nav>
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-<!-- MESSAGE MODAL -->
 <div class="msg-modal-overlay" id="msg-modal" style="display:none" role="dialog" aria-modal="true">
   <div class="msg-modal-box">
     <div class="msg-modal-header">
@@ -178,7 +164,6 @@
   </div>
 </div>
 
-<!-- CONFIRM DIALOG -->
 <div class="dialog-overlay" id="dialog-overlay" style="display:none" role="dialog" aria-modal="true">
   <div class="dialog-box">
     <h3 id="dialog-title"></h3>
@@ -190,7 +175,6 @@
   </div>
 </div>
 
-<!-- LOGIN -->
 <div class="login-overlay" id="login-overlay" style="display:none" role="dialog" aria-modal="true">
   <div class="login-box">
     <div class="login-logo" aria-hidden="true">IEEE</div>
@@ -205,7 +189,6 @@
 </div>
 
 <main id="main-content">
-  <!-- SUBMIT FEEDBACK -->
   <div id="feedback-panel" role="tabpanel" aria-labelledby="tab-feedback">
     <div class="card" id="form-card">
       <div class="card-header">
@@ -250,7 +233,6 @@
     </div>
   </div>
 
-  <!-- SUBMISSIONS -->
   <div id="admin-panel" role="tabpanel" aria-labelledby="tab-admin" style="display:none">
     <div class="admin-header">
       <div style="display:flex;align-items:center;gap:10px">
@@ -274,12 +256,9 @@
         <thead>
           <tr>
             <th class="sortable" id="date-th" tabindex="0" aria-sort="descending">Date <span id="sort-icon">▼</span></th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Gem</th>
+            <th>Name</th><th>Email</th><th>Gem</th>
             <th>Message <span style="font-weight:400;opacity:.75;font-size:.72rem">(double-click to expand)</span></th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Status</th><th>Action</th>
           </tr>
         </thead>
         <tbody id="submissions-body"></tbody>
@@ -288,7 +267,6 @@
     </div>
   </div>
 
-  <!-- GEM MANAGER -->
   <div id="gems-panel" role="tabpanel" aria-labelledby="tab-gems" style="display:none">
     <div class="card">
       <div class="card-header">
@@ -309,7 +287,7 @@
 </main>
 
 <script>
-const PROXY_URL = '/functions/sheet';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzx77DkKODnERInhhlqdl5uZ8NjssM0PDVhnSrqd43v4TRu09eH7vs-58D8ANT8XESz/exec';
 const ADMIN_USER = 'qeteam@ieee.org';
 const ADMIN_PASS = 'Welcome@1';
 const DEFAULT_GEMS = [
@@ -318,117 +296,157 @@ const DEFAULT_GEMS = [
   {name:'Fellows',status:'active'},{name:'Other',status:'active'}
 ];
 
-let adminAuthed=false, pendingTab=null, sortAsc=false;
-let cachedFeedback=null, cachedGems=null;
+let adminAuthed = false;
+let pendingTab  = null;
+let sortAsc     = false;
+let cachedFeedback = null;
+let cachedGems     = null;
+let toastTimer     = null;
 
-// ── API via Netlify proxy ─────────────────────────────────────────
-function api(params){
-  const qs=Object.entries(params).map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(String(v??''))).join('&');
-  return fetch(PROXY_URL+'?'+qs).then(r=>r.json());
+// ── JSONP ─────────────────────────────────────────────────────────
+function api(params) {
+  return new Promise(function(resolve, reject) {
+    var cb = 'gs_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
+    var script = document.createElement('script');
+    var timer = setTimeout(function() {
+      cleanup();
+      reject(new Error('Request timed out'));
+    }, 20000);
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cb];
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+    window[cb] = function(data) { cleanup(); resolve(data); };
+    script.onerror = function() { cleanup(); reject(new Error('Request failed')); };
+    var entries = Object.keys(params).map(function(k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(String(params[k] == null ? '' : params[k]));
+    });
+    entries.push('callback=' + encodeURIComponent(cb));
+    script.src = APPS_SCRIPT_URL + '?' + entries.join('&');
+    document.head.appendChild(script);
+  });
 }
 
-async function fetchFeedback(){
-  try{ const d=await api({action:'get'}); return d.result==='success'?d.data:[]; }
-  catch(e){ return []; }
+// ── FEEDBACK ──────────────────────────────────────────────────────
+async function fetchFeedback() {
+  try { var d = await api({action:'get'}); return d.result==='success' ? d.data : []; }
+  catch(e) { return []; }
 }
-async function postFeedback(entry){
-  const d=await api({action:'add',id:String(entry.id),date:entry.date,name:entry.name,email:entry.email,gem:entry.gem,message:entry.message,status:entry.status});
-  if(d.result!=='success') throw new Error(d.error||'Unknown error');
+async function postFeedback(entry) {
+  var d = await api({action:'add', id:String(entry.id), date:entry.date, name:entry.name, email:entry.email, gem:entry.gem, message:entry.message, status:entry.status});
+  if (d.result !== 'success') throw new Error(d.error || 'Unknown error');
 }
-async function updateFeedbackStatus(id,status){
-  await api({action:'update',id:String(id),status});
+async function updateFeedbackStatus(id, status) {
+  await api({action:'update', id:String(id), status:status});
 }
-async function deleteFeedbackByGem(gem){
-  await api({action:'deleteGem',gem});
+async function deleteFeedbackByGem(gem) {
+  await api({action:'deleteGem', gem:gem});
 }
 
 // ── GEMS ──────────────────────────────────────────────────────────
-function getGems(){ return cachedGems||DEFAULT_GEMS; }
-async function loadGems(){
-  try{
-    const d=await api({action:'getGems'});
-    cachedGems=(d.result==='success'&&d.gems&&d.gems.length>0)?d.gems:DEFAULT_GEMS;
-  }catch(e){ cachedGems=DEFAULT_GEMS; }
+function getGems() { return cachedGems || DEFAULT_GEMS; }
+async function loadGems() {
+  try {
+    var d = await api({action:'getGems'});
+    cachedGems = (d.result==='success' && d.gems && d.gems.length > 0) ? d.gems : DEFAULT_GEMS;
+  } catch(e) { cachedGems = DEFAULT_GEMS; }
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function xi(s){return s.replace(/Xplore/g,'<em>Xplore</em>');}
-function fmtDate(iso){
-  if(!iso||iso==='Invalid Date') return '—';
-  const d=new Date(iso);
-  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function xi(s)  { return s.replace(/Xplore/g,'<em>Xplore</em>'); }
+function fmtDate(iso) {
+  if (!iso || iso === 'Invalid Date') return '—';
+  var d = new Date(iso);
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + ' ' +
+         d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
 }
-function announce(msg){const el=document.getElementById('sr-announce');el.textContent='';setTimeout(()=>el.textContent=msg,50);}
+function announce(msg) {
+  var el = document.getElementById('sr-announce');
+  el.textContent = '';
+  setTimeout(function() { el.textContent = msg; }, 50);
+}
 
 // ── TOAST ─────────────────────────────────────────────────────────
-let toastTimer=null;
-function showToast(msg,type='success'){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.className='show '+type;announce(msg);
-  if(toastTimer)clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.className='',5000);
+function showToast(msg, type) {
+  type = type || 'success';
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  announce(msg);
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { t.className = ''; }, 5000);
 }
 
 // ── MESSAGE MODAL ─────────────────────────────────────────────────
-function openMsgModal(r){
-  document.getElementById('msg-modal-meta').innerHTML=
-    '<strong>'+esc(r.name)+'</strong><br>'+esc(r.email)+'<br>'+fmtDate(r.date);
-  document.getElementById('msg-modal-gem').innerHTML=xi(esc(r.gem))+' Gem';
-  document.getElementById('msg-modal-body').textContent=r.message||'';
-  document.getElementById('msg-modal').style.display='flex';
+function openMsgModal(r) {
+  document.getElementById('msg-modal-meta').innerHTML = '<strong>' + esc(r.name) + '</strong><br>' + esc(r.email) + '<br>' + fmtDate(r.date);
+  document.getElementById('msg-modal-gem').innerHTML = xi(esc(r.gem)) + ' Gem';
+  document.getElementById('msg-modal-body').textContent = r.message || '';
+  document.getElementById('msg-modal').style.display = 'flex';
   document.getElementById('msg-modal-close').focus();
 }
-function closeMsgModal(){ document.getElementById('msg-modal').style.display='none'; }
+function closeMsgModal() { document.getElementById('msg-modal').style.display = 'none'; }
 
 // ── CONFIRM DIALOG ────────────────────────────────────────────────
-function showConfirm(title,msg){
-  return new Promise(resolve=>{
-    const ov=document.getElementById('dialog-overlay');
-    document.getElementById('dialog-title').textContent=title;
-    document.getElementById('dialog-msg').textContent=msg;
-    ov.style.display='flex';
-    const y=document.getElementById('dialog-yes'),n=document.getElementById('dialog-no');
-    const y2=y.cloneNode(true);y.replaceWith(y2);
-    const n2=n.cloneNode(true);n.replaceWith(n2);
-    function done(v){ov.style.display='none';resolve(v);}
-    document.getElementById('dialog-yes').addEventListener('click',()=>done(true),{once:true});
-    document.getElementById('dialog-no').addEventListener('click',()=>done(false),{once:true});
-    setTimeout(()=>document.getElementById('dialog-no').focus(),50);
+function showConfirm(title, msg) {
+  return new Promise(function(resolve) {
+    var ov = document.getElementById('dialog-overlay');
+    document.getElementById('dialog-title').textContent = title;
+    document.getElementById('dialog-msg').textContent = msg;
+    ov.style.display = 'flex';
+    var y = document.getElementById('dialog-yes');
+    var n = document.getElementById('dialog-no');
+    var y2 = y.cloneNode(true); y.replaceWith(y2);
+    var n2 = n.cloneNode(true); n.replaceWith(n2);
+    function done(v) { ov.style.display = 'none'; resolve(v); }
+    document.getElementById('dialog-yes').addEventListener('click', function() { done(true); }, {once:true});
+    document.getElementById('dialog-no').addEventListener('click',  function() { done(false); }, {once:true});
+    setTimeout(function() { document.getElementById('dialog-no').focus(); }, 50);
   });
 }
 
-function showSpinner(){ document.getElementById('submissions-body').innerHTML='<tr><td colspan="7" style="text-align:center;padding:40px"><div class="spinner-wrap"><div class="spinner"></div>Loading…</div></td></tr>'; }
+function showSpinner() {
+  document.getElementById('submissions-body').innerHTML =
+    '<tr><td colspan="7" style="text-align:center;padding:40px"><div class="spinner-wrap"><div class="spinner"></div>Loading…</div></td></tr>';
+}
 
 // ── BOOT ──────────────────────────────────────────────────────────
-window.addEventListener('DOMContentLoaded',async()=>{
-  document.getElementById('tab-feedback').addEventListener('click',()=>switchTab('feedback'));
-  document.getElementById('tab-admin').addEventListener('click',()=>switchTab('admin'));
-  document.getElementById('tab-gems').addEventListener('click',()=>switchTab('gems'));
-  document.getElementById('login-btn').addEventListener('click',doLogin);
-  document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-  document.getElementById('cancel-btn').addEventListener('click',closeLogin);
-  document.getElementById('submit-btn').addEventListener('click',submitFeedback);
-  document.getElementById('another-btn').addEventListener('click',resetFeedbackTab);
-  document.getElementById('f-name').addEventListener('blur',()=>validateField('f-name'));
-  document.getElementById('f-email').addEventListener('blur',validateEmail);
-  document.getElementById('f-gem').addEventListener('blur',()=>validateField('f-gem'));
-  document.getElementById('f-msg').addEventListener('blur',()=>validateField('f-msg'));
-  document.getElementById('f-msg').addEventListener('input',()=>{
-    document.getElementById('f-msg-count').textContent=document.getElementById('f-msg').value.length+' characters';
+window.addEventListener('DOMContentLoaded', async function() {
+  document.getElementById('tab-feedback').addEventListener('click', function() { switchTab('feedback'); });
+  document.getElementById('tab-admin').addEventListener('click',    function() { switchTab('admin'); });
+  document.getElementById('tab-gems').addEventListener('click',     function() { switchTab('gems'); });
+  document.getElementById('login-btn').addEventListener('click', doLogin);
+  document.getElementById('login-pass').addEventListener('keydown', function(e) { if (e.key==='Enter') doLogin(); });
+  document.getElementById('cancel-btn').addEventListener('click', closeLogin);
+  document.getElementById('submit-btn').addEventListener('click', submitFeedback);
+  document.getElementById('another-btn').addEventListener('click', resetFeedbackTab);
+  document.getElementById('f-name').addEventListener('blur', function() { validateField('f-name'); });
+  document.getElementById('f-email').addEventListener('blur', validateEmail);
+  document.getElementById('f-gem').addEventListener('blur',  function() { validateField('f-gem'); });
+  document.getElementById('f-msg').addEventListener('blur',  function() { validateField('f-msg'); });
+  document.getElementById('f-msg').addEventListener('input', function() {
+    document.getElementById('f-msg-count').textContent = document.getElementById('f-msg').value.length + ' characters';
   });
-  document.getElementById('filter-gem').addEventListener('change',renderTable);
-  document.getElementById('filter-status').addEventListener('change',renderTable);
-  document.getElementById('export-btn').addEventListener('click',exportCSV);
-  const dateTh=document.getElementById('date-th');
-  dateTh.addEventListener('click',toggleSort);
-  dateTh.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSort();}});
-  document.getElementById('add-gem-btn').addEventListener('click',addGem);
-  document.getElementById('new-gem-name').addEventListener('input',e=>{document.getElementById('add-gem-btn').disabled=e.target.value.trim().length<3;});
-  document.getElementById('new-gem-name').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value.trim().length>=3)addGem();});
-  document.getElementById('msg-modal-close').addEventListener('click',closeMsgModal);
-  document.getElementById('msg-modal').addEventListener('click',e=>{if(e.target===document.getElementById('msg-modal'))closeMsgModal();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMsgModal();});
+  document.getElementById('filter-gem').addEventListener('change', renderTable);
+  document.getElementById('filter-status').addEventListener('change', renderTable);
+  document.getElementById('export-btn').addEventListener('click', exportCSV);
+  var dateTh = document.getElementById('date-th');
+  dateTh.addEventListener('click', toggleSort);
+  dateTh.addEventListener('keydown', function(e) { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); toggleSort(); } });
+  document.getElementById('add-gem-btn').addEventListener('click', addGem);
+  document.getElementById('new-gem-name').addEventListener('input', function(e) {
+    document.getElementById('add-gem-btn').disabled = e.target.value.trim().length < 3;
+  });
+  document.getElementById('new-gem-name').addEventListener('keydown', function(e) {
+    if (e.key==='Enter' && e.target.value.trim().length >= 3) addGem();
+  });
+  document.getElementById('msg-modal-close').addEventListener('click', closeMsgModal);
+  document.getElementById('msg-modal').addEventListener('click', function(e) {
+    if (e.target === document.getElementById('msg-modal')) closeMsgModal();
+  });
+  document.addEventListener('keydown', function(e) { if (e.key==='Escape') closeMsgModal(); });
 
   await loadGems();
   populateGemDropdown();
@@ -436,297 +454,344 @@ window.addEventListener('DOMContentLoaded',async()=>{
 });
 
 // ── AUTH ──────────────────────────────────────────────────────────
-function requireAdmin(tab){
-  if(adminAuthed){showPanel(tab);return;}
-  pendingTab=tab;
-  document.getElementById('login-overlay').style.display='flex';
-  setTimeout(()=>document.getElementById('login-user').focus(),50);
+function requireAdmin(tab) {
+  if (adminAuthed) { showPanel(tab); return; }
+  pendingTab = tab;
+  document.getElementById('login-overlay').style.display = 'flex';
+  setTimeout(function() { document.getElementById('login-user').focus(); }, 50);
 }
-function doLogin(){
-  const u=document.getElementById('login-user').value.trim();
-  const p=document.getElementById('login-pass').value;
-  if(u===ADMIN_USER&&p===ADMIN_PASS){
-    adminAuthed=true;
-    document.getElementById('login-overlay').style.display='none';
-    document.getElementById('login-error').style.display='none';
-    document.getElementById('login-user').value='';
-    document.getElementById('login-pass').value='';
-    if(pendingTab){showPanel(pendingTab);pendingTab=null;}
-  }else{
-    document.getElementById('login-error').style.display='block';
-    document.getElementById('login-pass').value='';
+function doLogin() {
+  var u = document.getElementById('login-user').value.trim();
+  var p = document.getElementById('login-pass').value;
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    adminAuthed = true;
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('login-error').style.display = 'none';
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
+    if (pendingTab) { showPanel(pendingTab); pendingTab = null; }
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('login-pass').value = '';
     document.getElementById('login-pass').focus();
   }
 }
-function closeLogin(){
-  document.getElementById('login-overlay').style.display='none';
-  document.getElementById('login-error').style.display='none';
-  document.getElementById('login-user').value='';
-  document.getElementById('login-pass').value='';
-  pendingTab=null;
+function closeLogin() {
+  document.getElementById('login-overlay').style.display = 'none';
+  document.getElementById('login-error').style.display = 'none';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  pendingTab = null;
 }
 
 // ── TABS ──────────────────────────────────────────────────────────
-function switchTab(tab){if(tab==='gems'){requireAdmin(tab);return;}showPanel(tab);}
-function showPanel(tab){
-  ['feedback','admin','gems'].forEach(t=>{
-    document.getElementById(t+'-panel').style.display=t===tab?'':'none';
-    document.getElementById('tab-'+t).setAttribute('aria-selected',t===tab?'true':'false');
+function switchTab(tab) { if (tab==='gems') { requireAdmin(tab); return; } showPanel(tab); }
+function showPanel(tab) {
+  ['feedback','admin','gems'].forEach(function(t) {
+    document.getElementById(t+'-panel').style.display = t===tab ? '' : 'none';
+    document.getElementById('tab-'+t).setAttribute('aria-selected', t===tab ? 'true' : 'false');
   });
-  if(tab==='feedback') resetFeedbackTab();
-  if(tab==='admin')    resetAdminTab();
-  if(tab==='gems')     renderGemManager();
+  if (tab==='feedback') resetFeedbackTab();
+  if (tab==='admin')    resetAdminTab();
+  if (tab==='gems')     renderGemManager();
 }
 
 // ── RESET ─────────────────────────────────────────────────────────
-async function resetFeedbackTab(){
-  document.getElementById('form-card').style.display='';
-  document.getElementById('success-card').style.display='none';
-  ['f-name','f-email','f-msg'].forEach(id=>{
-    document.getElementById(id).value='';
+async function resetFeedbackTab() {
+  document.getElementById('form-card').style.display = '';
+  document.getElementById('success-card').style.display = 'none';
+  ['f-name','f-email','f-msg'].forEach(function(id) {
+    document.getElementById(id).value = '';
     document.getElementById(id).setAttribute('aria-invalid','false');
     document.getElementById(id+'-err').classList.remove('visible');
   });
   document.getElementById('f-gem').setAttribute('aria-invalid','false');
   document.getElementById('f-gem-err').classList.remove('visible');
-  document.getElementById('f-msg-count').textContent='0 characters';
-  await loadGems(); populateGemDropdown(); applyUrlParam();
+  document.getElementById('f-msg-count').textContent = '0 characters';
+  await loadGems();
+  populateGemDropdown();
+  applyUrlParam();
 }
-async function resetAdminTab(){
-  sortAsc=false;
-  document.getElementById('sort-icon').textContent='▼';
+async function resetAdminTab() {
+  sortAsc = false;
+  document.getElementById('sort-icon').textContent = '▼';
   document.getElementById('date-th').setAttribute('aria-sort','descending');
-  document.getElementById('filter-status').value='active';
+  document.getElementById('filter-status').value = 'active';
   populateFilterDropdown();
   showSpinner();
-  document.getElementById('empty-state').style.display='none';
-  cachedFeedback=await fetchFeedback();
+  document.getElementById('empty-state').style.display = 'none';
+  cachedFeedback = await fetchFeedback();
   renderTable();
 }
 
 // ── DROPDOWNS ─────────────────────────────────────────────────────
-function populateGemDropdown(){
-  const gems=getGems(), sel=document.getElementById('f-gem');
-  sel.innerHTML='<option value="">— Select a Gem —</option>';
-  gems.filter(g=>g.status==='active').forEach(g=>{
-    const o=document.createElement('option');o.value=g.name;o.textContent=g.name;sel.appendChild(o);
+function populateGemDropdown() {
+  var gems = getGems();
+  var sel = document.getElementById('f-gem');
+  sel.innerHTML = '<option value="">— Select a Gem —</option>';
+  gems.filter(function(g) { return g.status==='active'; }).forEach(function(g) {
+    var o = document.createElement('option');
+    o.value = g.name; o.textContent = g.name; sel.appendChild(o);
   });
 }
-function populateFilterDropdown(){
-  const gems=getGems(), sel=document.getElementById('filter-gem');
-  sel.innerHTML='<option value="">All Gems</option>';
-  gems.forEach(g=>{
-    const o=document.createElement('option');o.value=g.name;o.textContent=g.name+(g.status==='retired'?' (retired)':'');sel.appendChild(o);
+function populateFilterDropdown() {
+  var gems = getGems();
+  var sel = document.getElementById('filter-gem');
+  sel.innerHTML = '<option value="">All Gems</option>';
+  gems.forEach(function(g) {
+    var o = document.createElement('option');
+    o.value = g.name; o.textContent = g.name + (g.status==='retired' ? ' (retired)' : '');
+    sel.appendChild(o);
   });
 }
-function applyUrlParam(){
-  const gem=new URLSearchParams(window.location.search).get('gem');
-  if(!gem)return;
-  const sel=document.getElementById('f-gem');
-  const opt=[...sel.options].find(o=>o.value.toLowerCase()===gem.toLowerCase());
-  if(opt){
-    sel.value=opt.value;
-    const ind=document.getElementById('gem-indicator');
-    ind.innerHTML='Reviewing: <span class="gem-badge">✦ '+xi(esc(opt.value))+' Gem</span>';
-    ind.style.display='block';
+function applyUrlParam() {
+  var gem = new URLSearchParams(window.location.search).get('gem');
+  if (!gem) return;
+  var sel = document.getElementById('f-gem');
+  var opt = Array.from(sel.options).find(function(o) { return o.value.toLowerCase()===gem.toLowerCase(); });
+  if (opt) {
+    sel.value = opt.value;
+    var ind = document.getElementById('gem-indicator');
+    ind.innerHTML = 'Reviewing: <span class="gem-badge">✦ ' + xi(esc(opt.value)) + ' Gem</span>';
+    ind.style.display = 'block';
   }
 }
 
 // ── VALIDATION ────────────────────────────────────────────────────
-function validateField(id){
-  const el=document.getElementById(id);
-  const empty=el.tagName==='SELECT'?el.value==='':el.value.trim()==='';
-  el.setAttribute('aria-invalid',empty?'true':'false');
-  document.getElementById(id+'-err').classList.toggle('visible',empty);
+function validateField(id) {
+  var el = document.getElementById(id);
+  var empty = el.tagName==='SELECT' ? el.value==='' : el.value.trim()==='';
+  el.setAttribute('aria-invalid', empty ? 'true' : 'false');
+  document.getElementById(id+'-err').classList.toggle('visible', empty);
   return !empty;
 }
-function validateEmail(){
-  const el=document.getElementById('f-email');
-  const val=el.value.trim();
-  const ok=val!==''&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-  el.setAttribute('aria-invalid',(!ok&&val!=='')?'true':'false');
-  document.getElementById('f-email-err').classList.toggle('visible',!ok&&val!=='');
+function validateEmail() {
+  var el = document.getElementById('f-email');
+  var val = el.value.trim();
+  var ok = val !== '' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+  el.setAttribute('aria-invalid', (!ok && val!=='') ? 'true' : 'false');
+  document.getElementById('f-email-err').classList.toggle('visible', !ok && val!=='');
   return ok;
 }
 
 // ── SUBMIT ────────────────────────────────────────────────────────
-async function submitFeedback(){
-  const nameOk=validateField('f-name'), emailOk=validateEmail(), gemOk=validateField('f-gem'), msgOk=validateField('f-msg');
-  const emailVal=document.getElementById('f-email').value.trim();
-  if(emailVal===''){document.getElementById('f-email').setAttribute('aria-invalid','true');document.getElementById('f-email-err').classList.add('visible');}
-  if(!nameOk||!emailOk||!gemOk||!msgOk){
-    for(const id of ['f-name','f-email','f-gem','f-msg']){
-      if(document.getElementById(id).getAttribute('aria-invalid')==='true'){document.getElementById(id).focus();break;}
-    }
+async function submitFeedback() {
+  var nameOk  = validateField('f-name');
+  var emailOk = validateEmail();
+  var gemOk   = validateField('f-gem');
+  var msgOk   = validateField('f-msg');
+  var emailVal = document.getElementById('f-email').value.trim();
+  if (emailVal === '') {
+    document.getElementById('f-email').setAttribute('aria-invalid','true');
+    document.getElementById('f-email-err').classList.add('visible');
+  }
+  if (!nameOk || !emailOk || !gemOk || !msgOk) {
+    ['f-name','f-email','f-gem','f-msg'].forEach(function(id) {
+      if (document.getElementById(id).getAttribute('aria-invalid')==='true') {
+        document.getElementById(id).focus();
+      }
+    });
     return;
   }
-  const entry={id:Date.now(),date:new Date().toISOString(),name:document.getElementById('f-name').value.trim(),email:document.getElementById('f-email').value.trim(),gem:document.getElementById('f-gem').value,message:document.getElementById('f-msg').value.trim(),status:'active'};
-  const btn=document.getElementById('submit-btn');
-  btn.disabled=true;btn.textContent='Submitting…';
-  try{
+  var entry = {
+    id:      Date.now(),
+    date:    new Date().toISOString(),
+    name:    document.getElementById('f-name').value.trim(),
+    email:   document.getElementById('f-email').value.trim(),
+    gem:     document.getElementById('f-gem').value,
+    message: document.getElementById('f-msg').value.trim(),
+    status:  'active'
+  };
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  try {
     await postFeedback(entry);
-    cachedFeedback=null;
-    document.getElementById('success-gem').innerHTML=xi(esc(entry.gem));
-    document.getElementById('form-card').style.display='none';
-    document.getElementById('success-card').style.display='';
+    cachedFeedback = null;
+    document.getElementById('success-gem').innerHTML = xi(esc(entry.gem));
+    document.getElementById('form-card').style.display = 'none';
+    document.getElementById('success-card').style.display = '';
     announce('Feedback submitted successfully.');
-  }catch(e){
-    showToast('Submission failed: '+e.message,'error');
+  } catch(e) {
+    showToast('Submission failed: ' + e.message, 'error');
   }
-  btn.disabled=false;btn.textContent='Submit Feedback →';
+  btn.disabled = false; btn.textContent = 'Submit Feedback →';
 }
 
 // ── TABLE ─────────────────────────────────────────────────────────
-function toggleSort(){
-  sortAsc=!sortAsc;
-  document.getElementById('sort-icon').textContent=sortAsc?'▲':'▼';
-  document.getElementById('date-th').setAttribute('aria-sort',sortAsc?'ascending':'descending');
+function toggleSort() {
+  sortAsc = !sortAsc;
+  document.getElementById('sort-icon').textContent = sortAsc ? '▲' : '▼';
+  document.getElementById('date-th').setAttribute('aria-sort', sortAsc ? 'ascending' : 'descending');
   renderTable();
 }
-
-function renderTable(){
-  const filterGem=document.getElementById('filter-gem').value;
-  const filterStatus=document.getElementById('filter-status').value;
-  const gems=getGems(), gemNames=new Set(gems.map(g=>g.name));
-  let all=(cachedFeedback||[]).filter(r=>gemNames.has(r.gem));
-  if(filterGem) all=all.filter(r=>r.gem===filterGem);
-  if(filterStatus!=='all') all=all.filter(r=>(r.status||'active')===filterStatus);
-  all.sort((a,b)=>sortAsc?new Date(a.date)-new Date(b.date):new Date(b.date)-new Date(a.date));
-  document.getElementById('count-badge').textContent=all.length;
-  const tbody=document.getElementById('submissions-body');
-  const empty=document.getElementById('empty-state');
-  if(!all.length){tbody.innerHTML='';empty.style.display='';return;}
-  empty.style.display='none';
-  tbody._rows=all;
-  tbody.innerHTML=all.map((r,i)=>{
-    const isCompleted=(r.status||'active')==='completed';
-    const gemExists=gemNames.has(r.gem);
-    const preview=r.message?(r.message.length>80?r.message.slice(0,80)+'…':r.message):'';
-    let ac;
-    if(!isCompleted) ac='<button class="btn-complete" data-id="'+r.id+'" data-action="complete">Mark Complete</button>';
-    else if(gemExists) ac='<button class="btn-reopen" data-id="'+r.id+'" data-action="reopen">Re-open</button>';
-    else ac='<span style="color:var(--muted);font-size:.78rem">—</span>';
+function renderTable() {
+  var filterGem    = document.getElementById('filter-gem').value;
+  var filterStatus = document.getElementById('filter-status').value;
+  var gems = getGems();
+  var gemNames = new Set(gems.map(function(g) { return g.name; }));
+  var all = (cachedFeedback || []).filter(function(r) { return gemNames.has(r.gem); });
+  if (filterGem)              all = all.filter(function(r) { return r.gem===filterGem; });
+  if (filterStatus !== 'all') all = all.filter(function(r) { return (r.status||'active')===filterStatus; });
+  all.sort(function(a,b) { return sortAsc ? new Date(a.date)-new Date(b.date) : new Date(b.date)-new Date(a.date); });
+  document.getElementById('count-badge').textContent = all.length;
+  var tbody = document.getElementById('submissions-body');
+  var empty = document.getElementById('empty-state');
+  if (!all.length) { tbody.innerHTML = ''; empty.style.display = ''; return; }
+  empty.style.display = 'none';
+  tbody._rows = all;
+  tbody.innerHTML = all.map(function(r, i) {
+    var isCompleted = (r.status||'active') === 'completed';
+    var gemExists   = gemNames.has(r.gem);
+    var preview     = r.message ? (r.message.length > 80 ? r.message.slice(0,80)+'…' : r.message) : '';
+    var ac;
+    if (!isCompleted)          ac = '<button class="btn-complete" data-id="'+r.id+'" data-action="complete">Mark Complete</button>';
+    else if (gemExists)        ac = '<button class="btn-reopen"   data-id="'+r.id+'" data-action="reopen">Re-open</button>';
+    else                       ac = '<span style="color:var(--muted);font-size:.78rem">—</span>';
     return '<tr>'
-      +'<td style="white-space:nowrap;font-size:.8rem;color:var(--muted)">'+fmtDate(r.date)+'</td>'
-      +'<td style="white-space:nowrap;font-weight:600">'+esc(r.name)+'</td>'
-      +'<td style="white-space:nowrap;color:var(--ieee-blue);font-size:.83rem">'+esc(r.email)+'</td>'
-      +'<td><span class="gem-pill">'+xi(esc(r.gem))+'</span></td>'
-      +'<td class="msg-td"><div class="msg-preview" data-idx="'+i+'">'+esc(preview)+'</div><div class="msg-hint">double-click to expand</div></td>'
-      +'<td><span class="'+(isCompleted?'status-completed-badge':'status-active-badge')+'">'+(isCompleted?'Completed':'Active')+'</span></td>'
-      +'<td style="white-space:nowrap">'+ac+'</td>'
-      +'</tr>';
+      + '<td style="white-space:nowrap;font-size:.8rem;color:var(--muted)">'  + fmtDate(r.date) + '</td>'
+      + '<td style="white-space:nowrap;font-weight:600">'                      + esc(r.name)     + '</td>'
+      + '<td style="white-space:nowrap;color:var(--ieee-blue);font-size:.83rem">' + esc(r.email) + '</td>'
+      + '<td><span class="gem-pill">' + xi(esc(r.gem)) + '</span></td>'
+      + '<td class="msg-td"><div class="msg-preview" data-idx="'+i+'">' + esc(preview) + '</div>'
+      + '<div class="msg-hint">double-click to expand</div></td>'
+      + '<td><span class="'+(isCompleted?'status-completed-badge':'status-active-badge')+'">'+(isCompleted?'Completed':'Active')+'</span></td>'
+      + '<td style="white-space:nowrap">'+ac+'</td>'
+      + '</tr>';
   }).join('');
 
-  tbody.querySelectorAll('.msg-preview').forEach(el=>{
-    el.addEventListener('dblclick',()=>{
-      const r=tbody._rows[parseInt(el.dataset.idx)];
-      if(r) openMsgModal(r);
+  tbody.querySelectorAll('.msg-preview').forEach(function(el) {
+    el.addEventListener('dblclick', function() {
+      var r = tbody._rows[parseInt(el.dataset.idx)];
+      if (r) openMsgModal(r);
     });
   });
-  tbody.querySelectorAll('[data-action]').forEach(btn=>{
-    btn.addEventListener('click',()=>toggleStatus(btn.dataset.id,btn.dataset.action));
+  tbody.querySelectorAll('[data-action]').forEach(function(btn) {
+    btn.addEventListener('click', function() { toggleStatus(btn.dataset.id, btn.dataset.action); });
   });
 }
-
-async function toggleStatus(id,action){
-  const status=action==='complete'?'completed':'active';
-  try{
-    await updateFeedbackStatus(id,status);
-    if(cachedFeedback){const e=cachedFeedback.find(r=>String(r.id)===String(id));if(e)e.status=status;}
-    showToast(action==='complete'?'Marked as completed.':'Re-opened as active.','success');
+async function toggleStatus(id, action) {
+  var status = action==='complete' ? 'completed' : 'active';
+  try {
+    await updateFeedbackStatus(id, status);
+    if (cachedFeedback) {
+      var entry = cachedFeedback.find(function(r) { return String(r.id)===String(id); });
+      if (entry) entry.status = status;
+    }
+    showToast(action==='complete' ? 'Marked as completed.' : 'Re-opened as active.', 'success');
     renderTable();
-  }catch(e){showToast('Update failed. Please try again.','error');}
+  } catch(e) { showToast('Update failed. Please try again.', 'error'); }
 }
 
 // ── GEM MANAGER ───────────────────────────────────────────────────
-async function renderGemManager(){
+async function renderGemManager() {
   await loadGems();
-  const gems=getGems();
-  const active=gems.filter(g=>g.status==='active');
-  const retired=gems.filter(g=>g.status==='retired');
-  document.getElementById('active-gem-list').innerHTML=active.length
-    ?active.map(g=>gemRow(g,gems.indexOf(g))).join('')
-    :'<div style="color:var(--muted);font-size:.9rem;padding:8px 0">No active Gems.</div>';
-  const retSec=document.getElementById('retired-section-title');
-  const retList=document.getElementById('retired-gem-list');
-  if(retired.length){retSec.style.display='block';retList.innerHTML=retired.map(g=>gemRow(g,gems.indexOf(g))).join('');}
-  else{retSec.style.display='none';retList.innerHTML='';}
-  document.querySelectorAll('[data-gem-action]').forEach(btn=>{
-    btn.addEventListener('click',()=>handleGemAction(btn.dataset.gemAction,parseInt(btn.dataset.idx)));
+  var gems    = getGems();
+  var active  = gems.filter(function(g) { return g.status==='active'; });
+  var retired = gems.filter(function(g) { return g.status==='retired'; });
+  document.getElementById('active-gem-list').innerHTML = active.length
+    ? active.map(function(g) { return gemRow(g, gems.indexOf(g)); }).join('')
+    : '<div style="color:var(--muted);font-size:.9rem;padding:8px 0">No active Gems.</div>';
+  var retSec  = document.getElementById('retired-section-title');
+  var retList = document.getElementById('retired-gem-list');
+  if (retired.length) {
+    retSec.style.display = 'block';
+    retList.innerHTML = retired.map(function(g) { return gemRow(g, gems.indexOf(g)); }).join('');
+  } else {
+    retSec.style.display = 'none';
+    retList.innerHTML = '';
+  }
+  document.querySelectorAll('[data-gem-action]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      handleGemAction(btn.dataset.gemAction, parseInt(btn.dataset.idx));
+    });
   });
 }
-
-function gemRow(g,idx){
-  const isRetired=g.status==='retired';
-  return '<div class="gem-row'+(isRetired?' retired':'')+'">'
-    +'<div class="gem-row-left"><span class="gem-name-label">'+xi(esc(g.name))+'</span>'
-    +'<span class="status-tag '+(isRetired?'status-gem-retired':'status-gem-active')+'">'+(isRetired?'Retired':'Active')+'</span></div>'
-    +'<div class="gem-row-actions">'
-    +(isRetired
-      ?'<button class="btn-sm btn-restore" data-gem-action="restore" data-idx="'+idx+'">Restore</button>'
-      :'<button class="btn-sm btn-retire"  data-gem-action="retire"  data-idx="'+idx+'">Retire</button>')
-    +'<button class="btn-sm btn-delete" data-gem-action="delete" data-idx="'+idx+'">Delete</button>'
-    +'</div></div>';
+function gemRow(g, idx) {
+  var isRetired = g.status === 'retired';
+  return '<div class="gem-row' + (isRetired?' retired':'') + '">'
+    + '<div class="gem-row-left">'
+    + '<span class="gem-name-label">' + xi(esc(g.name)) + '</span>'
+    + '<span class="status-tag ' + (isRetired?'status-gem-retired':'status-gem-active') + '">' + (isRetired?'Retired':'Active') + '</span>'
+    + '</div><div class="gem-row-actions">'
+    + (isRetired
+        ? '<button class="btn-sm btn-restore" data-gem-action="restore" data-idx="'+idx+'">Restore</button>'
+        : '<button class="btn-sm btn-retire"  data-gem-action="retire"  data-idx="'+idx+'">Retire</button>')
+    + '<button class="btn-sm btn-delete" data-gem-action="delete" data-idx="'+idx+'">Delete</button>'
+    + '</div></div>';
 }
-
-async function handleGemAction(action,idx){
-  const gems=getGems();const g=gems[idx];if(!g)return;
-  if(action==='retire'){
-    gems[idx].status='retired';cachedGems=[...gems];
-    try{await api({action:'updateGem',name:g.name,status:'retired'});}catch(e){}
-    showToast('"'+g.name+'" retired.','warning');renderGemManager();populateGemDropdown();
-  } else if(action==='restore'){
-    gems[idx].status='active';cachedGems=[...gems];
-    try{await api({action:'updateGem',name:g.name,status:'active'});}catch(e){}    showToast('"'+g.name+'" restored.','success');renderGemManager();populateGemDropdown();
-  } else if(action==='delete'){
-    const all=cachedFeedback||[];
-    const activeCount=all.filter(r=>r.gem===g.name&&(r.status||'active')==='active').length;
-    if(activeCount>0){showToast('Cannot delete "'+g.name+'" — '+activeCount+' active submission(s). Mark them Complete first.','error');return;}
-    const totalCount=all.filter(r=>r.gem===g.name).length;
-    const confirmed=await showConfirm('Delete "'+g.name+'"?',totalCount>0?'This will permanently delete all '+totalCount+' submission(s).':'This Gem has no submissions.');
-    if(!confirmed)return;
-    gems.splice(idx,1);cachedGems=[...gems];
-    try{await api({action:'removeGem',name:g.name});}catch(e){}
-    try{await deleteFeedbackByGem(g.name);}catch(e){}
-    if(cachedFeedback)cachedFeedback=cachedFeedback.filter(r=>r.gem!==g.name);
-    showToast('"'+g.name+'" deleted.','warning');renderGemManager();populateGemDropdown();
+async function handleGemAction(action, idx) {
+  var gems = getGems();
+  var g = gems[idx];
+  if (!g) return;
+  if (action === 'retire') {
+    gems[idx].status = 'retired'; cachedGems = gems.slice();
+    try { await api({action:'updateGem', name:g.name, status:'retired'}); } catch(e) {}
+    showToast('"'+g.name+'" retired.', 'warning');
+    renderGemManager(); populateGemDropdown();
+  } else if (action === 'restore') {
+    gems[idx].status = 'active'; cachedGems = gems.slice();
+    try { await api({action:'updateGem', name:g.name, status:'active'}); } catch(e) {}
+    showToast('"'+g.name+'" restored.', 'success');
+    renderGemManager(); populateGemDropdown();
+  } else if (action === 'delete') {
+    var all = cachedFeedback || [];
+    var activeCount = all.filter(function(r) { return r.gem===g.name && (r.status||'active')==='active'; }).length;
+    if (activeCount > 0) {
+      showToast('Cannot delete "'+g.name+'" — '+activeCount+' active submission(s). Mark them Complete first.', 'error');
+      return;
+    }
+    var totalCount = all.filter(function(r) { return r.gem===g.name; }).length;
+    var confirmed = await showConfirm('Delete "'+g.name+'"?',
+      totalCount > 0 ? 'This will permanently delete all '+totalCount+' submission(s).' : 'This Gem has no submissions.');
+    if (!confirmed) return;
+    gems.splice(idx, 1); cachedGems = gems.slice();
+    try { await api({action:'removeGem', name:g.name}); } catch(e) {}
+    try { await deleteFeedbackByGem(g.name); } catch(e) {}
+    if (cachedFeedback) cachedFeedback = cachedFeedback.filter(function(r) { return r.gem!==g.name; });
+    showToast('"'+g.name+'" deleted.', 'warning');
+    renderGemManager(); populateGemDropdown();
   }
 }
-
-async function addGem(){
-  const inp=document.getElementById('new-gem-name');
-  const name=inp.value.trim();if(name.length<3)return;
-  const gems=getGems();
-  if(gems.find(g=>g.name.toLowerCase()===name.toLowerCase())){showToast('"'+name+'" already exists.','error');return;}
-  showToast('Adding "'+name+'"…','info');
-  try{
-    await api({action:'addGem',name});
+async function addGem() {
+  var inp  = document.getElementById('new-gem-name');
+  var name = inp.value.trim();
+  if (name.length < 3) return;
+  var gems = getGems();
+  if (gems.find(function(g) { return g.name.toLowerCase()===name.toLowerCase(); })) {
+    showToast('"'+name+'" already exists.', 'error'); return;
+  }
+  showToast('Adding "'+name+'"…', 'info');
+  try {
+    await api({action:'addGem', name:name});
     await loadGems();
-    inp.value='';document.getElementById('add-gem-btn').disabled=true;
-    showToast('"'+name+'" added successfully!','success');
-    renderGemManager();populateGemDropdown();
-  }catch(e){
-    showToast('Failed to add gem. Please try again.','error');
+    inp.value = '';
+    document.getElementById('add-gem-btn').disabled = true;
+    showToast('"'+name+'" added successfully!', 'success');
+    renderGemManager(); populateGemDropdown();
+  } catch(e) {
+    showToast('Failed to add gem. Please try again.', 'error');
   }
 }
 
 // ── EXPORT CSV ────────────────────────────────────────────────────
-async function exportCSV(){
-  showToast('Fetching all submissions…','info');
-  let all=[];
-  try{ all=await fetchFeedback(); }catch(e){ all=cachedFeedback||[]; }
-  if(!all.length){showToast('No submissions to export.','info');return;}
-  const headers=['Date','Name','Email','Gem','Message','Status'];
-  const rows=all.map(r=>[fmtDate(r.date),r.name,r.email,r.gem,r.message,r.status||'active']
-    .map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(','));
-  const csv=[headers.join(','),...rows].join('\n');
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download='gem-feedback-'+new Date().toISOString().slice(0,10)+'.csv';
-  document.body.appendChild(a);a.click();
-  setTimeout(()=>{URL.revokeObjectURL(url);document.body.removeChild(a);},1000);
-  showToast('CSV downloaded — open with Excel!','success');
+async function exportCSV() {
+  showToast('Fetching all submissions…', 'info');
+  var all = [];
+  try { all = await fetchFeedback(); } catch(e) { all = cachedFeedback || []; }
+  if (!all.length) { showToast('No submissions to export.', 'info'); return; }
+  var headers = ['Date','Name','Email','Gem','Message','Status'];
+  var rows = all.map(function(r) {
+    return [fmtDate(r.date), r.name, r.email, r.gem, r.message, r.status||'active']
+      .map(function(v) { return '"' + String(v||'').replace(/"/g,'""') + '"'; }).join(',');
+  });
+  var csv  = [headers.join(',')].concat(rows).join('\n');
+  var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href = url; a.download = 'gem-feedback-' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a); a.click();
+  setTimeout(function() { URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
+  showToast('CSV downloaded — open with Excel!', 'success');
 }
 </script>
 </body>
