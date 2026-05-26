@@ -14,13 +14,13 @@
   .ieee-logo{font-size:1.5rem;font-weight:800;letter-spacing:2px;border:2px solid white;padding:2px 10px;border-radius:3px;}
   header h1{font-size:1rem;font-weight:400;opacity:.9;border-left:1px solid rgba(255,255,255,.3);padding-left:16px;}
   nav{background:var(--ieee-blue);display:flex;padding:0 32px;gap:0;box-shadow:0 2px 6px rgba(0,0,0,.15);}
-  .tab{padding:14px 28px;color:rgba(255,255,255,.7);cursor:pointer;font-size:.92rem;font-weight:500;border:none;background:none;font-family:inherit;position:relative;transition:color .2s;border-bottom:3px solid transparent;letter-spacing:.3px;}
+  .tab{padding:14px 28px;color:rgba(255,255,255,.7);cursor:pointer;font-size:.92rem;font-weight:500;border:none;background:none;font-family:inherit;position:relative;transition:color .2s;border-bottom:3px solid transparent;}
   .tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:3px;background:white;transform:scaleX(0);transition:transform .25s ease;}
-  .tab:hover{color:rgba(255,255,255,.95);}
+  .tab:hover{color:white;}
   .tab[aria-selected="true"]{color:white;font-weight:700;}
   .tab[aria-selected="true"]::after{transform:scaleX(1);}
-  main{max-width:960px;margin:36px auto;padding:0 16px;}
-  .spinner-wrap{display:flex;align-items:center;justify-content:center;padding:60px;color:var(--muted);gap:12px;font-size:.95rem;}
+  main{max-width:1100px;margin:36px auto;padding:0 20px;}
+  .spinner-wrap{display:flex;align-items:center;justify-content:center;padding:60px;color:var(--muted);gap:12px;}
   .spinner{width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--ieee-blue);border-radius:50%;animation:spin .7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
   .card{background:white;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:36px 40px;margin-bottom:20px;}
@@ -35,13 +35,13 @@
   input,select,textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:6px;font-size:.95rem;color:var(--text);background:white;transition:border .2s,box-shadow .2s;font-family:inherit;}
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ieee-accent);box-shadow:0 0 0 3px rgba(0,170,221,.18);}
   input[aria-invalid="true"],textarea[aria-invalid="true"],select[aria-invalid="true"]{border-color:var(--error);}
-  textarea{resize:vertical;min-height:160px;font-size:1rem;}
+  textarea{resize:vertical;min-height:160px;font-size:1rem;line-height:1.6;}
   .field-error{color:var(--error);font-size:.8rem;margin-top:4px;display:none;}
   .field-error.visible{display:block;}
   .char-count{font-size:.78rem;color:var(--muted);text-align:right;margin-top:4px;}
   .btn{padding:10px 22px;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .2s;font-family:inherit;}
   .btn-primary{background:var(--ieee-blue);color:white;border-color:var(--ieee-blue);}
-  .btn-primary:hover{background:var(--ieee-dark);border-color:var(--ieee-dark);}
+  .btn-primary:hover{background:var(--ieee-dark);}
   .btn-primary:disabled{background:#aaa;border-color:#aaa;cursor:not-allowed;opacity:.5;}
   .btn-outline{background:white;color:var(--ieee-blue);border-color:var(--ieee-blue);}
   .btn-outline:hover{background:var(--ieee-light);}
@@ -50,6 +50,7 @@
   .success-icon{font-size:3rem;margin-bottom:16px;}
   .success-box h2{color:var(--ieee-dark);margin-bottom:10px;}
   .success-box p{color:var(--muted);margin-bottom:24px;line-height:1.6;}
+
   /* TOAST */
   #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);color:white;padding:13px 28px;border-radius:8px;font-size:.9rem;font-weight:500;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:999;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2);}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
@@ -57,17 +58,22 @@
   #toast.warning{background:#c07000;}
   #toast.info{background:var(--ieee-blue);}
   #toast.error{background:#cc2200;}
+
   /* MESSAGE MODAL */
   .msg-modal-overlay{position:fixed;inset:0;background:rgba(0,40,60,.5);display:flex;align-items:center;justify-content:center;z-index:300;padding:20px;}
-  .msg-modal-box{background:white;border-radius:12px;padding:32px 36px;max-width:600px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.25);max-height:80vh;overflow-y:auto;}
-  .msg-modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:16px;}
-  .msg-modal-meta{font-size:.82rem;color:var(--muted);line-height:1.6;}
-  .msg-modal-meta strong{color:var(--ieee-dark);}
-  .msg-modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);padding:0 4px;line-height:1;flex-shrink:0;}
+  .msg-modal-box{background:white;border-radius:12px;padding:36px 40px;max-width:640px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,.25);max-height:85vh;overflow-y:auto;}
+  .msg-modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;gap:16px;}
+  .msg-modal-meta{font-size:.85rem;color:var(--muted);line-height:1.8;}
+  .msg-modal-meta strong{color:var(--ieee-dark);font-size:.95rem;}
+  .msg-modal-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--muted);padding:0 4px;line-height:1;flex-shrink:0;}
   .msg-modal-close:hover{color:var(--text);}
-  .msg-modal-gem{display:inline-block;background:var(--ieee-light);color:var(--ieee-blue);border-radius:12px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:14px;}
-  .msg-modal-body{font-size:.95rem;line-height:1.75;color:#333;white-space:pre-wrap;word-break:break-word;border-top:1px solid var(--border);padding-top:16px;}
-  /* DIALOG */
+  .msg-modal-gem-row{margin-bottom:16px;}
+  .msg-modal-gem{display:inline-block;background:var(--ieee-light);color:var(--ieee-blue);border-radius:12px;padding:3px 12px;font-size:.82rem;font-weight:700;}
+  .msg-modal-divider{border:none;border-top:1px solid var(--border);margin-bottom:20px;}
+  .msg-modal-label{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;}
+  .msg-modal-body{font-size:.98rem;line-height:1.85;color:#222;white-space:pre-wrap;word-break:break-word;}
+
+  /* CONFIRM DIALOG */
   .dialog-overlay{position:fixed;inset:0;background:rgba(0,40,60,.45);display:flex;align-items:center;justify-content:center;z-index:200;}
   .dialog-box{background:white;border-radius:12px;padding:32px 30px;width:100%;max-width:400px;box-shadow:0 8px 32px rgba(0,0,0,.18);text-align:center;}
   .dialog-box h3{color:var(--ieee-dark);margin-bottom:10px;font-size:1.05rem;}
@@ -77,6 +83,7 @@
   .dialog-yes:hover{background:#aa1a00;}
   .dialog-no{padding:9px 28px;background:white;color:var(--muted);border:2px solid var(--border);border-radius:6px;font-weight:600;cursor:pointer;font-size:.9rem;font-family:inherit;}
   .dialog-no:hover{background:var(--gray);}
+
   /* LOGIN */
   .login-overlay{position:fixed;inset:0;background:rgba(0,40,60,.55);display:flex;align-items:center;justify-content:center;z-index:100;}
   .login-box{background:white;border-radius:12px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.2);text-align:center;}
@@ -88,6 +95,7 @@
   .login-btn{width:100%;padding:12px;background:var(--ieee-blue);color:white;border:2px solid var(--ieee-blue);border-radius:6px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;}
   .login-btn:hover{background:var(--ieee-dark);}
   .cancel-lnk{display:block;margin-top:12px;color:var(--muted);font-size:.88rem;cursor:pointer;text-decoration:underline;background:none;border:none;width:100%;font-family:inherit;padding:4px;}
+
   /* SUBMISSIONS */
   .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
   .admin-header h2{color:var(--ieee-dark);font-size:1.15rem;}
@@ -96,25 +104,28 @@
   .filter-label{font-size:.85rem;font-weight:600;color:var(--ieee-dark);}
   .count-badge{background:var(--ieee-blue);color:white;border-radius:20px;padding:2px 12px;font-size:.8rem;font-weight:700;}
   .table-wrap{background:white;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow-x:auto;margin-bottom:20px;}
-  table{width:100%;border-collapse:collapse;min-width:900px;}
-  th{background:var(--ieee-dark);color:white;padding:11px 14px;text-align:left;font-size:.8rem;letter-spacing:.5px;white-space:nowrap;}
+  table{width:100%;border-collapse:collapse;min-width:860px;}
+  th{background:var(--ieee-dark);color:white;padding:12px 14px;text-align:left;font-size:.82rem;letter-spacing:.4px;white-space:nowrap;}
   th.sortable{cursor:pointer;user-select:none;}
   th.sortable:hover{background:#005580;}
-  td{padding:11px 14px;font-size:.87rem;border-bottom:1px solid var(--border);vertical-align:middle;}
+  td{padding:12px 14px;font-size:.88rem;border-bottom:1px solid var(--border);vertical-align:middle;}
   tr:last-child td{border-bottom:none;}
   tr:hover td{background:var(--ieee-light);}
-  .gem-pill{background:var(--ieee-light);color:var(--ieee-blue);border-radius:12px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;}
-  .msg-preview{max-width:280px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#444;line-height:1.5;cursor:pointer;font-size:.85rem;transition:color .15s;}
+  .gem-pill{background:var(--ieee-light);color:var(--ieee-blue);border-radius:12px;padding:3px 10px;font-size:.78rem;font-weight:700;white-space:nowrap;}
+  /* message cell */
+  .msg-td{min-width:220px;max-width:320px;}
+  .msg-preview{color:#333;line-height:1.55;font-size:.87rem;cursor:pointer;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
   .msg-preview:hover{color:var(--ieee-blue);}
-  .msg-hint{font-size:.7rem;color:var(--muted);margin-top:2px;}
+  .msg-hint{font-size:.68rem;color:var(--muted);margin-top:3px;font-style:italic;}
   .empty-state{text-align:center;padding:40px;color:var(--muted);}
   .empty-state div{font-size:2rem;margin-bottom:8px;}
   .status-active-badge{background:#e6f9ee;color:#1a7a3c;border-radius:12px;padding:3px 10px;font-size:.75rem;font-weight:700;white-space:nowrap;}
   .status-completed-badge{background:#f0f0f0;color:#888;border-radius:12px;padding:3px 10px;font-size:.75rem;font-weight:700;white-space:nowrap;}
-  .btn-complete{padding:5px 10px;font-size:.75rem;border-radius:5px;cursor:pointer;border:1.5px solid #1a7a3c;color:#1a7a3c;background:white;font-weight:600;white-space:nowrap;font-family:inherit;}
+  .btn-complete{padding:6px 12px;font-size:.78rem;border-radius:5px;cursor:pointer;border:1.5px solid #1a7a3c;color:#1a7a3c;background:white;font-weight:600;white-space:nowrap;font-family:inherit;}
   .btn-complete:hover{background:#e6f9ee;}
-  .btn-reopen{padding:5px 10px;font-size:.75rem;border-radius:5px;cursor:pointer;border:1.5px solid #aaa;color:#888;background:white;font-weight:600;white-space:nowrap;font-family:inherit;}
+  .btn-reopen{padding:6px 12px;font-size:.78rem;border-radius:5px;cursor:pointer;border:1.5px solid #aaa;color:#888;background:white;font-weight:600;white-space:nowrap;font-family:inherit;}
   .btn-reopen:hover{background:#f5f5f5;}
+
   /* GEM MANAGER */
   .section-title{font-size:1rem;font-weight:700;color:var(--ieee-dark);margin-bottom:14px;}
   .gem-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
@@ -137,7 +148,6 @@
   .add-gem-row{display:flex;gap:10px;}
   .add-gem-row input{flex:1;}
   @media(max-width:600px){.card{padding:22px 16px;}.form-row{flex-direction:column;gap:0;}main{margin:16px auto;}nav{padding:0 8px;}.tab{padding:12px 14px;font-size:.82rem;}}
-  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 </style>
 </head>
 <body>
@@ -155,21 +165,21 @@
 <div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <!-- MESSAGE MODAL -->
-<div class="msg-modal-overlay" id="msg-modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="msg-modal-title">
+<div class="msg-modal-overlay" id="msg-modal" style="display:none" role="dialog" aria-modal="true">
   <div class="msg-modal-box">
     <div class="msg-modal-header">
-      <div>
-        <div class="msg-modal-meta" id="msg-modal-title"></div>
-      </div>
+      <div class="msg-modal-meta" id="msg-modal-meta"></div>
       <button class="msg-modal-close" id="msg-modal-close" aria-label="Close">✕</button>
     </div>
-    <div id="msg-modal-gem"></div>
+    <div class="msg-modal-gem-row"><span class="msg-modal-gem" id="msg-modal-gem"></span></div>
+    <hr class="msg-modal-divider"/>
+    <div class="msg-modal-label">Feedback</div>
     <div class="msg-modal-body" id="msg-modal-body"></div>
   </div>
 </div>
 
 <!-- CONFIRM DIALOG -->
-<div class="dialog-overlay" id="dialog-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="dialog-title" aria-describedby="dialog-msg">
+<div class="dialog-overlay" id="dialog-overlay" style="display:none" role="dialog" aria-modal="true">
   <div class="dialog-box">
     <h3 id="dialog-title"></h3>
     <p id="dialog-msg"></p>
@@ -181,13 +191,13 @@
 </div>
 
 <!-- LOGIN -->
-<div class="login-overlay" id="login-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="login-heading">
+<div class="login-overlay" id="login-overlay" style="display:none" role="dialog" aria-modal="true">
   <div class="login-box">
     <div class="login-logo" aria-hidden="true">IEEE</div>
-    <h2 id="login-heading">Admin Access</h2>
+    <h2>Admin Access</h2>
     <p>This area is restricted to QE Team admins.</p>
-    <div class="form-group"><label for="login-user">Username</label><input type="email" id="login-user" placeholder="username@ieee.org" autocomplete="username" aria-required="true"/></div>
-    <div class="form-group"><label for="login-pass">Password</label><input type="password" id="login-pass" placeholder="Password" autocomplete="current-password" aria-required="true"/></div>
+    <div class="form-group"><label for="login-user">Username</label><input type="email" id="login-user" placeholder="username@ieee.org" autocomplete="username"/></div>
+    <div class="form-group"><label for="login-pass">Password</label><input type="password" id="login-pass" placeholder="Password" autocomplete="current-password"/></div>
     <div class="login-error" id="login-error" role="alert">Incorrect username or password.</div>
     <button class="login-btn" id="login-btn">Sign In</button>
     <button class="cancel-lnk" id="cancel-btn">Cancel</button>
@@ -201,38 +211,38 @@
       <div class="card-header">
         <h2>Share Your Gem Experience</h2>
         <p>Your feedback helps us improve our AI assistants. This takes less than a minute.</p>
-        <div id="gem-indicator" style="display:none" aria-live="polite"></div>
+        <div id="gem-indicator" style="display:none"></div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="f-name">Full Name <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-name">Full Name <span class="req">*</span></label>
           <input type="text" id="f-name" placeholder="Jane Doe" autocomplete="name" aria-required="true" aria-describedby="f-name-err"/>
           <div class="field-error" id="f-name-err" role="alert">Please enter your full name.</div>
         </div>
         <div class="form-group">
-          <label for="f-email">Email Address <span class="req" aria-hidden="true">*</span></label>
+          <label for="f-email">Email Address <span class="req">*</span></label>
           <input type="email" id="f-email" placeholder="you@example.com" autocomplete="email" aria-required="true" aria-describedby="f-email-err"/>
-          <div class="field-error" id="f-email-err" role="alert">Please enter a valid email address (must include @ and .).</div>
+          <div class="field-error" id="f-email-err" role="alert">Please enter a valid email address.</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="f-gem">Which Gem are you reviewing? <span class="req" aria-hidden="true">*</span></label>
+        <label for="f-gem">Which Gem are you reviewing? <span class="req">*</span></label>
         <select id="f-gem" aria-required="true" aria-describedby="f-gem-err"></select>
         <div class="field-error" id="f-gem-err" role="alert">Please select a Gem.</div>
       </div>
       <div class="form-group">
-        <label for="f-msg">Your Feedback <span class="req" aria-hidden="true">*</span></label>
+        <label for="f-msg">Your Feedback <span class="req">*</span></label>
         <textarea id="f-msg" placeholder="Tell us what worked well, what was confusing, or any suggestions… The more detail, the better!" aria-required="true" aria-describedby="f-msg-err"></textarea>
-        <div style="display:flex;justify-content:space-between;margin-top:4px;align-items:center">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
           <div class="field-error" id="f-msg-err" role="alert">Please enter your feedback.</div>
           <span id="f-msg-count" class="char-count">0 characters</span>
         </div>
       </div>
       <button class="btn btn-primary btn-submit" id="submit-btn">Submit Feedback →</button>
     </div>
-    <div class="card" id="success-card" style="display:none" aria-live="polite">
+    <div class="card" id="success-card" style="display:none">
       <div class="success-box">
-        <div class="success-icon" aria-hidden="true">✅</div>
+        <div class="success-icon">✅</div>
         <h2>Thank you for your feedback!</h2>
         <p>Your response has been recorded and will help improve the <strong id="success-gem"></strong> Gem experience for everyone at IEEE.</p>
         <button class="btn btn-primary" id="another-btn">Submit another response</button>
@@ -256,16 +266,20 @@
           <option value="completed">Completed</option>
           <option value="all">All</option>
         </select>
-        <button class="btn btn-outline" id="export-btn">⬇ Export Excel</button>
+        <button class="btn btn-outline" id="export-btn">⬇ Export CSV</button>
       </div>
     </div>
     <div class="table-wrap">
-      <table aria-label="Feedback submissions">
-        <colgroup><col class="c-date"/><col class="c-name"/><col class="c-email"/><col class="c-gem"/><col class="c-msg"/><col class="c-status"/><col class="c-action"/></colgroup>
+      <table>
         <thead>
           <tr>
             <th class="sortable" id="date-th" tabindex="0" aria-sort="descending">Date <span id="sort-icon">▼</span></th>
-            <th>Name</th><th>Email</th><th>Gem</th>            <th>Message <span style="font-weight:400;opacity:.7;font-size:.72rem">(click to read)</span></th><th>Status</th><th>Action</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gem</th>
+            <th>Message <span style="font-weight:400;opacity:.75;font-size:.72rem">(double-click to expand)</span></th>
+            <th>Status</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody id="submissions-body"></tbody>
@@ -295,11 +309,9 @@
 </main>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────────────
-const DIRECT_URL   = 'https://script.google.com/macros/s/AKfycbzx77DkKODnERInhhlqdl5uZ8NjssM0PDVhnSrqd43v4TRu09eH7vs-58D8ANT8XESz/exec';
-const PROXY_URL    = '/.netlify/functions/sheet';
-const ADMIN_USER   = 'qeteam@ieee.org';
-const ADMIN_PASS   = 'Welcome@1';
+const PROXY_URL  = '/.netlify/functions/sheet';
+const ADMIN_USER = 'qeteam@ieee.org';
+const ADMIN_PASS = 'Welcome@1';
 const DEFAULT_GEMS = [
   {name:'Xplore',status:'active'},{name:'eCF',status:'active'},
   {name:'IDAMS',status:'active'},{name:'WMS',status:'active'},
@@ -309,52 +321,45 @@ const DEFAULT_GEMS = [
 let adminAuthed=false, pendingTab=null, sortAsc=false;
 let cachedFeedback=null, cachedGems=null;
 
-// ── ALL calls go through Netlify proxy ───────────────────────────
-function jsonpCall(params, useProxy=true){
+// ── API via Netlify proxy ─────────────────────────────────────────
+function api(params){
   const qs=Object.entries(params).map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(String(v??''))).join('&');
   return fetch(PROXY_URL+'?'+qs).then(r=>r.json());
 }
 
-// ── GEMS (stored in Google Sheets via JSONP) ──────────────────────
-function getGems(){ return cachedGems || DEFAULT_GEMS; }
-
+// ── GEMS ──────────────────────────────────────────────────────────
+function getGems(){ return cachedGems||DEFAULT_GEMS; }
 async function loadGems(){
   try{
-    const d = await jsonpCall({action:'getGems'});
-    if(d.result==='success' && d.gems && d.gems.length>0){
-      cachedGems = d.gems;
-    } else {
-      cachedGems = DEFAULT_GEMS;
-    }
-  } catch(e){ console.error('loadGems:',e); cachedGems=DEFAULT_GEMS; }
+    const d=await api({action:'getGems'});
+    cachedGems=(d.result==='success'&&d.gems&&d.gems.length>0)?d.gems:DEFAULT_GEMS;
+  }catch(e){ cachedGems=DEFAULT_GEMS; }
 }
 
-// ── FEEDBACK (via Netlify proxy) ──────────────────────────────────
+// ── FEEDBACK ──────────────────────────────────────────────────────
 async function fetchFeedback(){
-  try{
-    const d=await jsonpCall({action:'get'},true);
-    return d.result==='success'?d.data:[];
-  }catch(e){console.error('fetchFeedback:',e);return[];}
+  try{ const d=await api({action:'get'}); return d.result==='success'?d.data:[]; }
+  catch(e){ return []; }
 }
 async function postFeedback(entry){
-  const d=await jsonpCall({action:'add',id:String(entry.id),date:entry.date,name:entry.name,email:entry.email,gem:entry.gem,message:entry.message,status:entry.status},true);
+  const d=await api({action:'add',id:String(entry.id),date:entry.date,name:entry.name,email:entry.email,gem:entry.gem,message:entry.message,status:entry.status});
   if(d.result!=='success') throw new Error(d.error||'Unknown error');
 }
 async function updateFeedbackStatus(id,status){
-  await jsonpCall({action:'update',id:String(id),status},true);
+  await api({action:'update',id:String(id),status});
 }
 async function deleteFeedbackByGem(gem){
-  await jsonpCall({action:'deleteGem',gem},true);
+  await api({action:'deleteGem',gem});
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function xi(s){return s.replace(/Xplore/g,'<em>Xplore</em>');}
 function fmtDate(iso){
+  if(!iso||iso==='Invalid Date') return '—';
   const d=new Date(iso);
-  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'<br><span style="font-size:.72rem;color:var(--muted)">'+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})+'</span>';
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
 }
-function fmtDatePlain(iso){const d=new Date(iso);return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});}
 function announce(msg){const el=document.getElementById('sr-announce');el.textContent='';setTimeout(()=>el.textContent=msg,50);}
 
 // ── TOAST ─────────────────────────────────────────────────────────
@@ -368,16 +373,14 @@ function showToast(msg,type='success'){
 
 // ── MESSAGE MODAL ─────────────────────────────────────────────────
 function openMsgModal(r){
-  document.getElementById('msg-modal-title').innerHTML=
-    '<strong>'+esc(r.name)+'</strong> &nbsp;·&nbsp; '+esc(r.email)+'<br>'+fmtDatePlain(r.date);
-  document.getElementById('msg-modal-gem').innerHTML='<span class="msg-modal-gem">'+xi(esc(r.gem))+'</span>';
-  document.getElementById('msg-modal-body').innerHTML=xi(esc(r.message));
+  document.getElementById('msg-modal-meta').innerHTML=
+    '<strong>'+esc(r.name)+'</strong><br>'+esc(r.email)+'<br>'+fmtDate(r.date);
+  document.getElementById('msg-modal-gem').innerHTML=xi(esc(r.gem))+' Gem';
+  document.getElementById('msg-modal-body').textContent=r.message||'';
   document.getElementById('msg-modal').style.display='flex';
   document.getElementById('msg-modal-close').focus();
 }
-function closeMsgModal(){
-  document.getElementById('msg-modal').style.display='none';
-}
+function closeMsgModal(){ document.getElementById('msg-modal').style.display='none'; }
 
 // ── CONFIRM DIALOG ────────────────────────────────────────────────
 function showConfirm(title,msg){
@@ -396,7 +399,7 @@ function showConfirm(title,msg){
   });
 }
 
-function showSpinner(id){document.getElementById(id).innerHTML='<tr><td colspan="7"><div class="spinner-wrap"><div class="spinner"></div>Loading…</div></td></tr>';}
+function showSpinner(){ document.getElementById('submissions-body').innerHTML='<tr><td colspan="7" style="text-align:center;padding:40px"><div class="spinner-wrap"><div class="spinner"></div>Loading…</div></td></tr>'; }
 
 // ── BOOT ──────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded',async()=>{
@@ -417,20 +420,17 @@ window.addEventListener('DOMContentLoaded',async()=>{
   });
   document.getElementById('filter-gem').addEventListener('change',renderTable);
   document.getElementById('filter-status').addEventListener('change',renderTable);
-  document.getElementById('export-btn').addEventListener('click',exportExcel);
+  document.getElementById('export-btn').addEventListener('click',exportCSV);
   const dateTh=document.getElementById('date-th');
   dateTh.addEventListener('click',toggleSort);
   dateTh.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSort();}});
-  const addBtn=document.getElementById('add-gem-btn');
-  const nameInput=document.getElementById('new-gem-name');
-  addBtn.addEventListener('click',addGem);
-  nameInput.addEventListener('input',()=>{addBtn.disabled=nameInput.value.trim().length<3;});
-  nameInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&nameInput.value.trim().length>=3)addGem();});
+  document.getElementById('add-gem-btn').addEventListener('click',addGem);
+  document.getElementById('new-gem-name').addEventListener('input',e=>{document.getElementById('add-gem-btn').disabled=e.target.value.trim().length<3;});
+  document.getElementById('new-gem-name').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.value.trim().length>=3)addGem();});
   document.getElementById('msg-modal-close').addEventListener('click',closeMsgModal);
   document.getElementById('msg-modal').addEventListener('click',e=>{if(e.target===document.getElementById('msg-modal'))closeMsgModal();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMsgModal();});
 
-  // load gems from Sheets on every boot
   await loadGems();
   populateGemDropdown();
   applyUrlParam();
@@ -446,16 +446,15 @@ function requireAdmin(tab){
 function doLogin(){
   const u=document.getElementById('login-user').value.trim();
   const p=document.getElementById('login-pass').value;
-  const err=document.getElementById('login-error');
   if(u===ADMIN_USER&&p===ADMIN_PASS){
     adminAuthed=true;
     document.getElementById('login-overlay').style.display='none';
-    err.style.display='none';
+    document.getElementById('login-error').style.display='none';
     document.getElementById('login-user').value='';
     document.getElementById('login-pass').value='';
     if(pendingTab){showPanel(pendingTab);pendingTab=null;}
   }else{
-    err.style.display='block';
+    document.getElementById('login-error').style.display='block';
     document.getElementById('login-pass').value='';
     document.getElementById('login-pass').focus();
   }
@@ -475,9 +474,9 @@ function showPanel(tab){
     document.getElementById(t+'-panel').style.display=t===tab?'':'none';
     document.getElementById('tab-'+t).setAttribute('aria-selected',t===tab?'true':'false');
   });
-  if(tab==='feedback')resetFeedbackTab();
-  if(tab==='admin')resetAdminTab();
-  if(tab==='gems')renderGemManager();
+  if(tab==='feedback') resetFeedbackTab();
+  if(tab==='admin')    resetAdminTab();
+  if(tab==='gems')     renderGemManager();
 }
 
 // ── RESET ─────────────────────────────────────────────────────────
@@ -492,9 +491,7 @@ async function resetFeedbackTab(){
   document.getElementById('f-gem').setAttribute('aria-invalid','false');
   document.getElementById('f-gem-err').classList.remove('visible');
   document.getElementById('f-msg-count').textContent='0 characters';
-  await loadGems();
-  populateGemDropdown();
-  applyUrlParam();
+  await loadGems(); populateGemDropdown(); applyUrlParam();
 }
 async function resetAdminTab(){
   sortAsc=false;
@@ -502,29 +499,25 @@ async function resetAdminTab(){
   document.getElementById('date-th').setAttribute('aria-sort','descending');
   document.getElementById('filter-status').value='active';
   populateFilterDropdown();
-  showSpinner('submissions-body');
+  showSpinner();
   document.getElementById('empty-state').style.display='none';
   cachedFeedback=await fetchFeedback();
   renderTable();
 }
 
-// ── GEM DROPDOWNS ─────────────────────────────────────────────────
+// ── DROPDOWNS ─────────────────────────────────────────────────────
 function populateGemDropdown(){
-  const gems=getGems();
-  const sel=document.getElementById('f-gem');
+  const gems=getGems(), sel=document.getElementById('f-gem');
   sel.innerHTML='<option value="">— Select a Gem —</option>';
   gems.filter(g=>g.status==='active').forEach(g=>{
-    const o=document.createElement('option');
-    o.value=g.name;o.textContent=g.name;sel.appendChild(o);
+    const o=document.createElement('option');o.value=g.name;o.textContent=g.name;sel.appendChild(o);
   });
 }
 function populateFilterDropdown(){
-  const gems=getGems();
-  const sel=document.getElementById('filter-gem');
+  const gems=getGems(), sel=document.getElementById('filter-gem');
   sel.innerHTML='<option value="">All Gems</option>';
   gems.forEach(g=>{
-    const o=document.createElement('option');
-    o.value=g.name;o.textContent=g.name+(g.status==='retired'?' (retired)':'');sel.appendChild(o);
+    const o=document.createElement('option');o.value=g.name;o.textContent=g.name+(g.status==='retired'?' (retired)':'');sel.appendChild(o);
   });
 }
 function applyUrlParam(){
@@ -559,10 +552,7 @@ function validateEmail(){
 
 // ── SUBMIT ────────────────────────────────────────────────────────
 async function submitFeedback(){
-  const nameOk=validateField('f-name');
-  const emailOk=validateEmail();
-  const gemOk=validateField('f-gem');
-  const msgOk=validateField('f-msg');
+  const nameOk=validateField('f-name'), emailOk=validateEmail(), gemOk=validateField('f-gem'), msgOk=validateField('f-msg');
   const emailVal=document.getElementById('f-email').value.trim();
   if(emailVal===''){document.getElementById('f-email').setAttribute('aria-invalid','true');document.getElementById('f-email-err').classList.add('visible');}
   if(!nameOk||!emailOk||!gemOk||!msgOk){
@@ -582,13 +572,12 @@ async function submitFeedback(){
     document.getElementById('success-card').style.display='';
     announce('Feedback submitted successfully.');
   }catch(e){
-    console.error('Submit error:',e);
     showToast('Submission failed: '+e.message,'error');
   }
   btn.disabled=false;btn.textContent='Submit Feedback →';
 }
 
-// ── SORT ──────────────────────────────────────────────────────────
+// ── TABLE ─────────────────────────────────────────────────────────
 function toggleSort(){
   sortAsc=!sortAsc;
   document.getElementById('sort-icon').textContent=sortAsc?'▲':'▼';
@@ -596,47 +585,42 @@ function toggleSort(){
   renderTable();
 }
 
-// ── SUBMISSIONS TABLE ─────────────────────────────────────────────
 function renderTable(){
   const filterGem=document.getElementById('filter-gem').value;
   const filterStatus=document.getElementById('filter-status').value;
-  const gems=getGems();
-  const gemNames=new Set(gems.map(g=>g.name));
+  const gems=getGems(), gemNames=new Set(gems.map(g=>g.name));
   let all=(cachedFeedback||[]).filter(r=>gemNames.has(r.gem));
-  if(filterGem)all=all.filter(r=>r.gem===filterGem);
-  if(filterStatus!=='all')all=all.filter(r=>(r.status||'active')===filterStatus);
+  if(filterGem) all=all.filter(r=>r.gem===filterGem);
+  if(filterStatus!=='all') all=all.filter(r=>(r.status||'active')===filterStatus);
   all.sort((a,b)=>sortAsc?new Date(a.date)-new Date(b.date):new Date(b.date)-new Date(a.date));
   document.getElementById('count-badge').textContent=all.length;
   const tbody=document.getElementById('submissions-body');
   const empty=document.getElementById('empty-state');
   if(!all.length){tbody.innerHTML='';empty.style.display='';return;}
   empty.style.display='none';
-
+  tbody._rows=all;
   tbody.innerHTML=all.map((r,i)=>{
     const isCompleted=(r.status||'active')==='completed';
     const gemExists=gemNames.has(r.gem);
-    const preview=r.message&&r.message.length>60?r.message.slice(0,60)+'…':r.message||'';
+    const preview=r.message?(r.message.length>80?r.message.slice(0,80)+'…':r.message):'';
     let ac;
     if(!isCompleted) ac='<button class="btn-complete" data-id="'+r.id+'" data-action="complete">Mark Complete</button>';
     else if(gemExists) ac='<button class="btn-reopen" data-id="'+r.id+'" data-action="reopen">Re-open</button>';
-    else ac='<span style="color:var(--muted);font-size:.75rem">—</span>';
+    else ac='<span style="color:var(--muted);font-size:.78rem">—</span>';
     return '<tr>'
-      +'<td style="font-size:.78rem;color:var(--muted);white-space:nowrap">'+fmtDate(r.date)+'</td>'
-      +'<td style="font-weight:600;white-space:nowrap">'+esc(r.name)+'</td>'
-      +'<td style="color:var(--ieee-blue);font-size:.82rem;white-space:nowrap">'+esc(r.email)+'</td>'
+      +'<td style="white-space:nowrap;font-size:.8rem;color:var(--muted)">'+fmtDate(r.date)+'</td>'
+      +'<td style="white-space:nowrap;font-weight:600">'+esc(r.name)+'</td>'
+      +'<td style="white-space:nowrap;color:var(--ieee-blue);font-size:.83rem">'+esc(r.email)+'</td>'
       +'<td><span class="gem-pill">'+xi(esc(r.gem))+'</span></td>'
-      +'<td><div class="msg-preview" data-row="'+i+'" title="Double-click to read full message">'+esc(preview)+'</div><div class="msg-hint">double-click to read</div></td>'
+      +'<td class="msg-td"><div class="msg-preview" data-idx="'+i+'">'+esc(preview)+'</div><div class="msg-hint">double-click to expand</div></td>'
       +'<td><span class="'+(isCompleted?'status-completed-badge':'status-active-badge')+'">'+(isCompleted?'Completed':'Active')+'</span></td>'
-      +'<td>'+ac+'</td>'
+      +'<td style="white-space:nowrap">'+ac+'</td>'
       +'</tr>';
   }).join('');
 
-  // store rows for modal access
-  tbody._rows = all;
-
   tbody.querySelectorAll('.msg-preview').forEach(el=>{
     el.addEventListener('dblclick',()=>{
-      const r=tbody._rows[parseInt(el.dataset.row)];
+      const r=tbody._rows[parseInt(el.dataset.idx)];
       if(r) openMsgModal(r);
     });
   });
@@ -675,13 +659,13 @@ async function renderGemManager(){
 
 function gemRow(g,idx){
   const isRetired=g.status==='retired';
-  return '<div class="gem-row'+(isRetired?' retired':'')+'" role="listitem">'
+  return '<div class="gem-row'+(isRetired?' retired':'')+'">'
     +'<div class="gem-row-left"><span class="gem-name-label">'+xi(esc(g.name))+'</span>'
     +'<span class="status-tag '+(isRetired?'status-gem-retired':'status-gem-active')+'">'+(isRetired?'Retired':'Active')+'</span></div>'
     +'<div class="gem-row-actions">'
     +(isRetired
       ?'<button class="btn-sm btn-restore" data-gem-action="restore" data-idx="'+idx+'">Restore</button>'
-      :'<button class="btn-sm btn-retire" data-gem-action="retire" data-idx="'+idx+'">Retire</button>')
+      :'<button class="btn-sm btn-retire"  data-gem-action="retire"  data-idx="'+idx+'">Retire</button>')
     +'<button class="btn-sm btn-delete" data-gem-action="delete" data-idx="'+idx+'">Delete</button>'
     +'</div></div>';
 }
@@ -689,23 +673,22 @@ function gemRow(g,idx){
 async function handleGemAction(action,idx){
   const gems=getGems();const g=gems[idx];if(!g)return;
   if(action==='retire'){
-    gems[idx].status='retired';cachedGems=gems;
-    try{await jsonpCall({action:'updateGem',name:g.name,status:'retired'});}catch(e){}
+    gems[idx].status='retired';cachedGems=[...gems];
+    try{await api({action:'updateGem',name:g.name,status:'retired'});}catch(e){}
     showToast('"'+g.name+'" retired.','warning');renderGemManager();populateGemDropdown();
   } else if(action==='restore'){
-    gems[idx].status='active';cachedGems=gems;
-    try{await jsonpCall({action:'updateGem',name:g.name,status:'active'});}catch(e){}
+    gems[idx].status='active';cachedGems=[...gems];
+    try{await api({action:'updateGem',name:g.name,status:'active'});}catch(e){}
     showToast('"'+g.name+'" restored.','success');renderGemManager();populateGemDropdown();
   } else if(action==='delete'){
     const all=cachedFeedback||[];
     const activeCount=all.filter(r=>r.gem===g.name&&(r.status||'active')==='active').length;
     if(activeCount>0){showToast('Cannot delete "'+g.name+'" — '+activeCount+' active submission(s). Mark them Complete first.','error');return;}
     const totalCount=all.filter(r=>r.gem===g.name).length;
-    const note=totalCount>0?'This will permanently delete all '+totalCount+' submission(s) linked to this Gem.':'This Gem has no submissions.';
-    const confirmed=await showConfirm('Delete "'+g.name+'"?',note);
+    const confirmed=await showConfirm('Delete "'+g.name+'"?',totalCount>0?'This will permanently delete all '+totalCount+' submission(s).':'This Gem has no submissions.');
     if(!confirmed)return;
-    gems.splice(idx,1);cachedGems=gems;
-    try{await jsonpCall({action:'removeGem',name:g.name});}catch(e){}
+    gems.splice(idx,1);cachedGems=[...gems];
+    try{await api({action:'removeGem',name:g.name});}catch(e){}
     try{await deleteFeedbackByGem(g.name);}catch(e){}
     if(cachedFeedback)cachedFeedback=cachedFeedback.filter(r=>r.gem!==g.name);
     showToast('"'+g.name+'" deleted.','warning');renderGemManager();populateGemDropdown();
@@ -713,39 +696,38 @@ async function handleGemAction(action,idx){
 }
 
 async function addGem(){
-  const inp=document.getElementById('new-gem-name');const name=inp.value.trim();if(name.length<3)return;
+  const inp=document.getElementById('new-gem-name');
+  const name=inp.value.trim();if(name.length<3)return;
   const gems=getGems();
   if(gems.find(g=>g.name.toLowerCase()===name.toLowerCase())){showToast('"'+name+'" already exists.','error');return;}
-  gems.push({name,status:'active'});cachedGems=gems;
-  try{await jsonpCall({action:'addGem',name});}catch(e){console.error('addGem error:',e);}
-  inp.value='';document.getElementById('add-gem-btn').disabled=true;
-  showToast('"'+name+'" added.','success');renderGemManager();populateGemDropdown();
+  showToast('Adding "'+name+'"…','info');
+  try{
+    await api({action:'addGem',name});
+    await loadGems();
+    inp.value='';document.getElementById('add-gem-btn').disabled=true;
+    showToast('"'+name+'" added successfully!','success');
+    renderGemManager();populateGemDropdown();
+  }catch(e){
+    showToast('Failed to add gem. Please try again.','error');
+  }
 }
 
-// ── EXPORT EXCEL ──────────────────────────────────────────────────
-async function exportExcel(){
+// ── EXPORT CSV ────────────────────────────────────────────────────
+async function exportCSV(){
   showToast('Fetching all submissions…','info');
-  // fetch ALL feedback regardless of current filter
-  let all = [];
-  try { all = await fetchFeedback(); } catch(e) { all = cachedFeedback||[]; }
-  if(!all.length){ showToast('No submissions to export.','info'); return; }
-
-  // build CSV
-  const headers = ['Date','Name','Email','Gem','Message','Status'];
-  const rows = all.map(r=>[
-    fmtDatePlain(r.date), r.name, r.email, r.gem, r.message, r.status||'active'
-  ].map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(','));
-  const csv = [headers.join(','), ...rows].join('\n');
-
-  // download as CSV
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'gem-feedback-'+new Date().toISOString().slice(0,10)+'.csv';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(()=>{ URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
+  let all=[];
+  try{ all=await fetchFeedback(); }catch(e){ all=cachedFeedback||[]; }
+  if(!all.length){showToast('No submissions to export.','info');return;}
+  const headers=['Date','Name','Email','Gem','Message','Status'];
+  const rows=all.map(r=>[fmtDate(r.date),r.name,r.email,r.gem,r.message,r.status||'active']
+    .map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(','));
+  const csv=[headers.join(','),...rows].join('\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='gem-feedback-'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(url);document.body.removeChild(a);},1000);
   showToast('CSV downloaded — open with Excel!','success');
 }
 </script>
