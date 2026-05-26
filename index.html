@@ -327,16 +327,6 @@ function api(params){
   return fetch(PROXY_URL+'?'+qs).then(r=>r.json());
 }
 
-// ── GEMS ──────────────────────────────────────────────────────────
-function getGems(){ return cachedGems||DEFAULT_GEMS; }
-async function loadGems(){
-  try{
-    const d=await api({action:'getGems'});
-    cachedGems=(d.result==='success'&&d.gems&&d.gems.length>0)?d.gems:DEFAULT_GEMS;
-  }catch(e){ cachedGems=DEFAULT_GEMS; }
-}
-
-// ── FEEDBACK ──────────────────────────────────────────────────────
 async function fetchFeedback(){
   try{ const d=await api({action:'get'}); return d.result==='success'?d.data:[]; }
   catch(e){ return []; }
@@ -350,6 +340,15 @@ async function updateFeedbackStatus(id,status){
 }
 async function deleteFeedbackByGem(gem){
   await api({action:'deleteGem',gem});
+}
+
+// ── GEMS ──────────────────────────────────────────────────────────
+function getGems(){ return cachedGems||DEFAULT_GEMS; }
+async function loadGems(){
+  try{
+    const d=await api({action:'getGems'});
+    cachedGems=(d.result==='success'&&d.gems&&d.gems.length>0)?d.gems:DEFAULT_GEMS;
+  }catch(e){ cachedGems=DEFAULT_GEMS; }
 }
 
 // ── UTILS ─────────────────────────────────────────────────────────
@@ -678,8 +677,7 @@ async function handleGemAction(action,idx){
     showToast('"'+g.name+'" retired.','warning');renderGemManager();populateGemDropdown();
   } else if(action==='restore'){
     gems[idx].status='active';cachedGems=[...gems];
-    try{await api({action:'updateGem',name:g.name,status:'active'});}catch(e){}
-    showToast('"'+g.name+'" restored.','success');renderGemManager();populateGemDropdown();
+    try{await api({action:'updateGem',name:g.name,status:'active'});}catch(e){}    showToast('"'+g.name+'" restored.','success');renderGemManager();populateGemDropdown();
   } else if(action==='delete'){
     const all=cachedFeedback||[];
     const activeCount=all.filter(r=>r.gem===g.name&&(r.status||'active')==='active').length;
