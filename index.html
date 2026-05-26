@@ -96,22 +96,15 @@
   .filter-label{font-size:.85rem;font-weight:600;color:var(--ieee-dark);}
   .count-badge{background:var(--ieee-blue);color:white;border-radius:20px;padding:2px 12px;font-size:.8rem;font-weight:700;}
   .table-wrap{background:white;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow-x:auto;margin-bottom:20px;}
-  table{width:100%;border-collapse:collapse;table-layout:fixed;}
-  col.c-date{width:130px;}
-  col.c-name{width:130px;}
-  col.c-email{width:160px;}
-  col.c-gem{width:90px;}
-  col.c-msg{width:auto;}
-  col.c-status{width:95px;}
-  col.c-action{width:125px;}
-  th{background:var(--ieee-dark);color:white;padding:11px 12px;text-align:left;font-size:.8rem;letter-spacing:.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  table{width:100%;border-collapse:collapse;min-width:900px;}
+  th{background:var(--ieee-dark);color:white;padding:11px 14px;text-align:left;font-size:.8rem;letter-spacing:.5px;white-space:nowrap;}
   th.sortable{cursor:pointer;user-select:none;}
   th.sortable:hover{background:#005580;}
-  td{padding:10px 12px;font-size:.87rem;border-bottom:1px solid var(--border);vertical-align:middle;overflow:hidden;}
+  td{padding:11px 14px;font-size:.87rem;border-bottom:1px solid var(--border);vertical-align:middle;}
   tr:last-child td{border-bottom:none;}
   tr:hover td{background:var(--ieee-light);}
   .gem-pill{background:var(--ieee-light);color:var(--ieee-blue);border-radius:12px;padding:2px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;}
-  .msg-preview{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#444;line-height:1.5;cursor:pointer;font-size:.85rem;transition:color .15s;}
+  .msg-preview{max-width:280px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#444;line-height:1.5;cursor:pointer;font-size:.85rem;transition:color .15s;}
   .msg-preview:hover{color:var(--ieee-blue);}
   .msg-hint{font-size:.7rem;color:var(--muted);margin-top:2px;}
   .empty-state{text-align:center;padding:40px;color:var(--muted);}
@@ -628,11 +621,11 @@ function renderTable(){
     else if(gemExists) ac='<button class="btn-reopen" data-id="'+r.id+'" data-action="reopen">Re-open</button>';
     else ac='<span style="color:var(--muted);font-size:.75rem">—</span>';
     return '<tr>'
-      +'<td style="font-size:.78rem;color:var(--muted)">'+fmtDate(r.date)+'</td>'
-      +'<td style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(r.name)+'</td>'
-      +'<td style="color:var(--ieee-blue);font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(r.email)+'</td>'
+      +'<td style="font-size:.78rem;color:var(--muted);white-space:nowrap">'+fmtDate(r.date)+'</td>'
+      +'<td style="font-weight:600;white-space:nowrap">'+esc(r.name)+'</td>'
+      +'<td style="color:var(--ieee-blue);font-size:.82rem;white-space:nowrap">'+esc(r.email)+'</td>'
       +'<td><span class="gem-pill">'+xi(esc(r.gem))+'</span></td>'
-      +'<td><div class="msg-preview" data-row="'+i+'" title="Click to read full message">'+esc(preview)+'</div><div class="msg-hint">click to read</div></td>'
+      +'<td><div class="msg-preview" data-row="'+i+'" title="Double-click to read full message">'+esc(preview)+'</div><div class="msg-hint">double-click to read</div></td>'
       +'<td><span class="'+(isCompleted?'status-completed-badge':'status-active-badge')+'">'+(isCompleted?'Completed':'Active')+'</span></td>'
       +'<td>'+ac+'</td>'
       +'</tr>';
@@ -642,7 +635,7 @@ function renderTable(){
   tbody._rows = all;
 
   tbody.querySelectorAll('.msg-preview').forEach(el=>{
-    el.addEventListener('click',()=>{
+    el.addEventListener('dblclick',()=>{
       const r=tbody._rows[parseInt(el.dataset.row)];
       if(r) openMsgModal(r);
     });
@@ -731,26 +724,29 @@ async function addGem(){
 
 // ── EXPORT EXCEL ──────────────────────────────────────────────────
 async function exportExcel(){
-  const all=cachedFeedback||[];
-  if(!all.length){showToast('No submissions to export.','info');return;}
-  showToast('Preparing Excel…','info');
-  if(!window.XLSX){
-    await new Promise((res,rej)=>{
-      const s=document.createElement('script');
-      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-      s.onload=res;s.onerror=rej;document.head.appendChild(s);
-    });
-  }
-  const rows=all.map(r=>({
-    Date:fmtDatePlain(r.date),Name:r.name,Email:r.email,
-    Gem:r.gem,Message:r.message,Status:r.status||'active'
-  }));
-  const ws=XLSX.utils.json_to_sheet(rows);
-  ws['!cols']=[{wch:22},{wch:20},{wch:28},{wch:12},{wch:60},{wch:12}];
-  const wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,'Feedback',ws);
-  XLSX.writeFile(wb,'gem-feedback-'+new Date().toISOString().slice(0,10)+'.xlsx');
-  showToast('Excel downloaded!','success');
+  showToast('Fetching all submissions…','info');
+  // fetch ALL feedback regardless of current filter
+  let all = [];
+  try { all = await fetchFeedback(); } catch(e) { all = cachedFeedback||[]; }
+  if(!all.length){ showToast('No submissions to export.','info'); return; }
+
+  // build CSV
+  const headers = ['Date','Name','Email','Gem','Message','Status'];
+  const rows = all.map(r=>[
+    fmtDatePlain(r.date), r.name, r.email, r.gem, r.message, r.status||'active'
+  ].map(v=>'"'+String(v||'').replace(/"/g,'""')+'"').join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+
+  // download as CSV
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'gem-feedback-'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
+  showToast('CSV downloaded — open with Excel!','success');
 }
 </script>
 </body>
