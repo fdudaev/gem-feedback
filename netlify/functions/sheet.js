@@ -1,26 +1,21 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuj1S9rLJhmO0ee7Ot7jEEp6dd0hyFfTsMnX2oBeCAGoVB-cr0dgyj7EEXQfcmRSlT/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzx77DkKODnERInhhlqdl5uZ8NjssM0PDVhnSrqd43v4TRu09eH7vs-58D8ANT8XESz/exec';
 
-exports.handler = async function(event) {
-  const params = event.queryStringParameters || {};
-  const qs = new URLSearchParams(params).toString();
-  const url = APPS_SCRIPT_URL + '?' + qs;
-
+exports.handler = async (event) => {
+  const params = new URLSearchParams(event.queryStringParameters || {}).toString();
+  const url = `${APPS_SCRIPT_URL}?${params}`;
   try {
-    const response = await fetch(url, { redirect: 'follow' });
-    const text = await response.text();
+    const r = await fetch(url, { redirect: 'follow' });
+    const body = await r.text();
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: text
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body
     };
-  } catch (err) {
+  } catch (e) {
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ result: 'error', error: err.message })
+      body: JSON.stringify({ result: 'error', error: e.message })
     };
   }
 };
